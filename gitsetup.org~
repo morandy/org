@@ -1,0 +1,23 @@
+* ironkey
+pass:
+newironkey
+* github ssh
+passphrase:
+my accordion is green and has buttons
+** TODO make shorter ssh passphrase
+We don't set anything up to "remember", so going to be typing that a lot
+* github
+
+* TODO install WebAPI
+
+In Server Manager, open "Add Roles and Features" wizard and select the Web Server (IIS) Role in Server Roles.
+Under IIS Server Role Features, select .Net Framework 4.5 Features - Asp.Net 4.5, WCF Services - HTTP Activation & TCP Port Sharing
+Under Web Server Role (IIS) - Role Services, expand Web Server -> Common HTTP Features and select Default Document, Directory Browsing, HTTP Errors and Static Content
+Under Web Server Role (IIS) - Role Services, expand Web Server -> Health and Diagnostics and select HTTP Logging, Logging Tools, Request Monitor and Tracing
+Under Web Server Role (IIS) - Role Services, expand Web Server -> Security and select Request Filtering
+Under Internet Information Services, expand Web Management Tools, then select IIS Management Console.
+
+* Backend Setup
+step 6 - check NUnit test runner (visual studio extension)
+skip 7 and 8
+

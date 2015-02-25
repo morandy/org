@@ -1,0 +1,123 @@
+:Naming Scheme: ${taskboardID}.json 
+
+* HTML5
+** Useful Commands
+*** Make JSON Pretty
+M-x json-mode (if not on)
+M-x json-pretty-print
+*** Make XML Pretty
+M-x xml-mode (enable syntax)
+M-x sgml-mode
+M-x sgml-pretty-print
+** script fixing
+*** setup
+- corrected SSMS
+- updated master ("$ git pull origin master")
+- 
+*** phone notes
+- may be issues
+
+publicly navigatable URL for each dashboard
+silverlight XAML
+
+XAML-
+XmlDocument
+XDocument
+
+XAML to JSON converter
+in the OneOffs directory
+
+Ask Joe - have dashboard properties changed?
+
+XAML Math - feature that allows for UI specification to do math on data points before they get read into charts
+JSON - publish version of data already having math done to it?
+Come up with list of data streams and associated calibration operations
+
+*** important files/dirs
+OptiRTCAzure/LINQPad/Curation/
+- XAML-Search-Feature-Use.linq
+- Convert-XAML-to-Json-Dashboards.linq
+OptiRTCAzure/One offs/XamlToJsonDashboardMigration/
+-XamlToJsonDashboardMigration.sln
+*** DB reltaion
+Mapped out in dbml
+*** tests
+**** First JSON attempt:
+{
+ "id":23,
+ "title":"NC State, System Overview",
+ "activeLayout":null,
+ "group":
+ {
+   "id":5,
+   "name":"NC State Rainwater Harvesting"
+ },
+ "layouts":null,
+ "pods":null,
+ "project":
+ {
+   "id":1,
+   "name":"Tryon Place"
+ },
+ "specVersion":1
+}
+
+** DONE refactor
+*** DONE Make XAML parsing separate class
+4 Errors:
+- ConfigureXML()
+- SetDashboardActiveLayout() -- change, needs bool "has sidepanel"
+- DashboardHasSidePanel() -- implement
+- DashboardBuilderConfigureXML -- change this test
+- DashboardBuilderHasSidePanel() -- change this test
+
+bool setXaml (checks "is empty"
+
+** XAML -> C# -> JSON
+*** availableTimeSpams
+Defaulted to [ 1, 2, 3, 4 ] in constructors of any pod that used this
+*** gaugePod
+added check for title to address "untitled Latest Value & Trend Pod"
+- If there is a ":" in the Text, split()[0], otherwise, use the Text
+#+NAME: hack fix to names
+#+BEGIN_SRC cs
+string title = null;
+XmlNode textBlock = gaugeXaml.PreviousSibling;
+if(textBlock != null && textBlock.Name == "TextBlock")
+{
+    string text = textBlock.Attributes["Text"].Value;
+    if(text.Contains(":"))
+    {
+	title = text.Split(':').First();
+    }
+    else
+    {
+	title = text;
+    }
+}
+#+END_SRC
+**** Possible Errors
+Previous child is an xml comment, !--
+- fix: if finds !-- in the outter xml, goes back one more sibling.
+*** Find bugs in JSON						       :BUGS:
+Known issues are things not finding "Title", possible due to comments in XAML
+- This is partially due to XAML being man-made, so the layout isn't 100% consistant,
+  which makes it difficult to parse programatically perfectly
+** Conversion Notes from Scott S
+*** fixes worked on
+- pulling the labels/titles/etc from XAML, data ranges, etc
+*** datastream related
+Included on Drive is math.csv, in which is a list of datastreams with math in them
+- taking custom XAML math, turning it into backend calculations for datastreams
+- fixing metadata with proper units
+** DONE Naming Convention
+- Ask what naming convention is for JSON files and change Program.cs, if needed
+Alex: 
+"that works - in production that data is persisted as a property of a record 
+not as a file so as long as we can identify the content that's all that matters" 
+** Last bits?
+Anything else before "good"?
+Uploaded taskboardJSON.zip
+** DNA Pod missing title
+Title Blank?
+check, is previous sibling <TextBlock/> ? Get Text attribute

@@ -1,0 +1,23 @@
+How to make a pull request
+
+* Push Changes
+# add all of the files
+$ git add -A
+
+# make a commit, use a detailed message
+$ git commit -m "..."
+
+# push changes to branch
+$ git push origin ${branchName}
+
+* Rebase
+# checkout master
+$ git checkout master
+$ git pull
+$ git checkout ${branchName}
+$ git rebase master
+
+* Push again, with force
+# doesn't work without -f for some reason
+$ git push -f origin ${branchName}
+

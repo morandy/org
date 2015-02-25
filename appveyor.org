@@ -1,0 +1,90 @@
+Notes on AppVeyor
+* Testing
+** testing can produce XML of results
+- Upload from build script to Test results endpoint, will be added to Tests tab
+*** test results endpoint format:
+https://ci.appveyor.com/api/testresults/{resultsType}/{jobId}
+- resultsType - test framework name to parse text results (mstest, xunit, nunit)
+- jobId - build job ID that is currently running, can be read from APPVEYOR_JOB_ID env variable
+** configuring tests
+- Only for Premium*
+- Set up tests in visual studio with a category attribute
+#+NAME: TestCategory Visual Studio
+#+BEGIN_SRC c-sharp
+[TestMethod, TestCategory("A")]
+public void MyTest()
+{
+}
+#+END_SRC
+- Then in appveyor.yml, include "categories:" and break it down
+#+NAME: parallel tests yaml
+#+BEGIN_SRC yml
+test:
+  categories:
+    - Common       # A category common for all jobs
+    - [UI]         # 1st job
+    - [DAL, BL]    # 2nd job
+#+END_SRC
+* cool stuff
+** Status Badges
+Can be included on github or wherever to indicate the build status
+* appveyor.yml info
+- '#' denotes comment
+- minimal file is empty, all sections are optional
+- indent each level with 2 spaces (no tabs)
+- case-sensitive
+- section names should be unique on each level
+#+NAME: sample appveyor.yml
+#+BEGIN_SRC yml
+
+# version format
+version: 1.0.{build}
+
+test:
+  assemblies:
+    -asm1.dll
+
+  categories:
+    - UI
+    - E2E
+
+#+END_SRC
+
+
+* TODO Tasks
+** TODO Two Separate CI Builds?
+Project Hierchy: 
+/Opti
+    /MontyCode
+
+Opti should build (main proj) -- YAML
+MontyCode should build separate -- different notifications? YAML    
+
+*** Solution Names in Enviornment Variables?
+http://help.appveyor.com/discussions/questions/833-target-multiple-solution-files
+#+BEGIN_SRC yaml
+environment:
+  matrix:
+  - solution_name: solution1.sln
+  - solution_name: solution2.sln
+#+END_SRC
+
+** TODO Notifications
+*** Email dev team notifications about builds
+#+NAME: Notification Yaml
+#+BEGIN_SRC yaml
+notifications:
+  - provider: Email
+    to:
+      - devs@optirtc.com
+    subject: 'Build {{status}}'                  # optional
+    message: "{{message}}, {{commitId}}, ..."    # optional
+    on_build_success: true|false
+    on_build_failure: true|false
+    on_build_status_changed: true|false
+#+END_SRC
+*** emals
+- abedig@optirtc.com
+- ksheffer@optirtc.com
+- jrossi@optirtc.com
+*** TODO Test above code

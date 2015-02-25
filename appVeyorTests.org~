@@ -1,0 +1,250 @@
+* 20 errors, all "Metadata file '...' could not be found"
+** errors:
+Error	10	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.MaaS\bin\Debug\OptiRTC.MaaS.dll' could not be found	C:\src\OptiRTCAzure\DataProcessorRole\CSC	DataProcessorRole
+Error	47	Metadata file 'C:\src\OptiRTCAzure\DataProcessorRole\bin\Debug\DataProcessorRole.dll' could not be found	C:\src\OptiRTCAzure\DataProcessorRole.Tests\CSC	DataProcessorRole.Tests
+Error	48	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.MaaS\bin\Debug\OptiRTC.MaaS.dll' could not be found	C:\src\OptiRTCAzure\DataProcessorRole.Tests\CSC	DataProcessorRole.Tests
+Error	16	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.DelegatingHandler\bin\Debug\OptiRTC.DelegatingHandler.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.Data.Http\CSC	OptiRTC.Data.Http
+Error	17	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.OAuthHelpers\bin\Debug\OptiRTC.OAuthHelpers.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.Data.Http\CSC	OptiRTC.Data.Http
+Error	18	Metadata file 'C:\src\OptiRTCAzure\WindowsAzure.Acs.Oauth2\bin\Debug\WindowsAzure.Acs.Oauth2.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.Data.Http\CSC	OptiRTC.Data.Http
+Error	44	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.Data.Http\bin\OptiRTC.Data.Http.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.Data.Http.Tests\CSC	OptiRTC.Data.Http.Tests
+Error	45	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.OAuthHelpers\bin\Debug\OptiRTC.OAuthHelpers.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.Data.Http.Tests\CSC	OptiRTC.Data.Http.Tests
+Error	46	Metadata file 'C:\src\OptiRTCAzure\WindowsAzure.Acs.Oauth2\bin\Debug\WindowsAzure.Acs.Oauth2.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.Data.Http.Tests\CSC	OptiRTC.Data.Http.Tests
+Error	6	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.OAuthHelpers\bin\Debug\OptiRTC.OAuthHelpers.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.DelegatingHandler\CSC	OptiRTC.DelegatingHandler
+Error	7	Metadata file 'C:\src\OptiRTCAzure\WindowsAzure.Acs.Oauth2\bin\Debug\WindowsAzure.Acs.Oauth2.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.DelegatingHandler\CSC	OptiRTC.DelegatingHandler
+Error	41	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.DelegatingHandler\bin\Debug\OptiRTC.DelegatingHandler.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.DelegatingHandler.Tests\CSC	OptiRTC.DelegatingHandler.Tests
+Error	42	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.OAuthHelpers\bin\Debug\OptiRTC.OAuthHelpers.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.DelegatingHandler.Tests\CSC	OptiRTC.DelegatingHandler.Tests
+Error	5	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.Maas.Calculations\bin\Debug\OptiRTC.Maas.Calculations.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.MaaS\CSC	OptiRTC.MaaS
+Error	20	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.MaaS\bin\Debug\OptiRTC.MaaS.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.MaaS.Tests\CSC	OptiRTC.MaaS.Tests
+Error	39	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.DelegatingHandler\bin\Debug\OptiRTC.DelegatingHandler.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.Notifications.Http\CSC	OptiRTC.Notifications.Http
+Error	3	Metadata file 'C:\src\OptiRTCAzure\WindowsAzure.Acs.Oauth2\bin\Debug\WindowsAzure.Acs.Oauth2.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.OAuthHelpers\CSC	OptiRTC.OAuthHelpers
+Error	12	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.DelegatingHandler\bin\Debug\OptiRTC.DelegatingHandler.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.Public.Http\CSC	OptiRTC.Public.Http
+Error	21	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.Public.Http\bin\OptiRTC.Public.Http.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.Public.Http.Tests\CSC	OptiRTC.Public.Http.Tests
+Error	2	Metadata file 'C:\src\OptiRTCAzure\FluentACS\bin\Debug\FluentACS.dll' could not be found	C:\src\OptiRTCAzure\WindowsAzure.Acs.Oauth2\CSC	WindowsAzure.Acs.Oauth2
+** missing dlls
+MaaS.dll
+DataProcessorRole.dll
+DelegatingHandler.dll
+OAuthHelpers.dll
+Oauth2.dll
+Http.dll
+Calculations.dll
+FluentACS.dll
+
+* enviornment-setup.bat
+- failures?
+R.Project v2.15.0
+
+* DONE double-check sln
+- make sure that all projects named *.test are included in this test solution
+- make sure that related project to test is also included
+
+** added
+OptiRTC.Events.Tests
+OptiRTC.ProcessingObjects.Tests
+
+** after add
+rebuilt - 24 warnings
+
+*
+
+* TODO tests
+
+** alex tasks - Moved to own org file
+*** Anaysis -- most important
+VM with: Chrome + LastPass, LinqPAD 4, 
+
+Store image of PC on BLOB
+packer.io - scripting installs?
+
+Use Case:
+Fire up N machines, run, get files
+*** Azure Cmdlets
+Needed, get familiar
+**** Clear all of the exported data files older than {date} from OptiRTC data export history
+
+** My Build
+Assumption: All underlying code is correct, tests are incorrect
+*** DONE JSonSerialize
+JSON files are different - coded output vs embeded json file
+See diff - probably just "Json spec modified since initial implementation." as the unit test says
+**** ask alex about JSON
+While he's on the phone
+(files don't match)
+more concerned with if the models are the same rather than the actual data
+
+Git history on test data file, diff those, see if something changed?
+*** DONE "%0D" related issues
+
+Show amanda, RFC link, the %0D
+
+**** Ideas 
+In EventUtilities - add a "new lines" variable that can be inserted ("%0D") as needed and also regex'd for?
+Because mailTo? (RFC 2368), requires characters in URLs be encoded, line breaks MUST be encoded with "%0D%0A".
+[[https://www.ietf.org/rfc/rfc2368.txt][RFC 2368]] - section "5. Encoding"
+**** notes
+Ignore below, data just stored, only cares if splitting on the delimiter
+GetBodyWithoutMailIdentifiers(...) returns "TestMessage.%0D" -- if built with BuildEventMailBodyIdentifer(...)
+-- has no unit test?
+
+**** DONE BuildStandard
+"%0D" -- carriage return (hex for 13)
+
+Changed StartsWith to look for ("%0D--------------------------------------") instead of "--------------------------------------"
+Changed Regex to "%0D" from "\r\n|\r|\n"
+Added 1 to indexes for Splits, [0] = ""
+
+***** actions
+Changed unit test to search for "%0D"
+Changed some asserts from IsTrue to AreEqual in order to get better results
+Added messages to ambiguous tests
+
+**** DONE ParseCorrectMessage
+Bug caused by "%0D"
+Added messages to ambiguous tests
+***** TryParseEventMailIdentifiers
+135 - Split on "\r\n|\r|\n" only gets 1 line, full of junk
+141 - TryParse returns false, 
+
+**** DONE ParseCorrectMessageWithEmptyAction
+Added messages to ambiguous tests
+**** EventUtilities.TryParseEventMailIdentifiers
+Changed regex expr to "%0D" from "\r\n|\r|\r"
+
+*** Build Results
+- Pushed branch, running tests
+- CLR Version: (Net 3.5) ???
+- 
+** AppVeyor Tests
+For PageResulstsTests, added more detailed message to Assert.IsTrue(), what we are looking for {0} and what we are looking in {1}
+
+Tests failing:
+Expected "%24skiptoken=1000%24top=200"
+Was      "$skiptoken=1000$top=200"
+
+%24 == $ 
+[[http://www.w3schools.com/tags/ref_urlencode.asp][url encoding]] $ encodes to %24
+
+*** notes on encoding
+use: Uri.EscapeDataString, not HttpUtility.UrlEncode
+EscapeUriString() -- if what we're escaping is a URI
+
+"By default, the EscapeDataString method converts all characters except for RFC 2396 unreserved characters to their hexadecimal representation. 
+If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the EscapeDataString method converts all characters, except for RFC 3986 unreserved characters, to their hexadecimal representation.
+All Unicode characters are converted to UTF-8 format before being escaped.
+This method assumes that stringToEscape has no escape sequences in it.
+By default, the string is escaped according to RFC 2396. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the string is escaped according to RFC 3986 and RFC 3987.
+See these RFCs for a definition of reserved and unreserved characters."
+[[https://msdn.microsoft.com/en-us/library/system.uri.escapedatastring%28v=vs.110%29.aspx][MSDN]], [[https://www.ietf.org/rfc/rfc2396.txt][rfc2396]]
+
+"System.Web.HttpUtility.UrlEncode escapes the tilde (~) character. System.Uri.EscapeDataString does not.
+For every other character their behavior appears to be the same (in my tests anyway). 
+One overall difference though is that HttpUtility.UrlEncode uses lowercase hex encoding whereas Uri.EscapeDataString uses uppercase hex encoding. 
+The RFC 3986 says uppercase should be used."
+[[http://blog.nerdbank.net/2009/05/uriescapedatapath-and.html][source]] -- 2009
+
+"Developer should avoid encoding Space into "+" or double encoded into "%2b". 
+It is recommended that when encode URL use "System.Uri.EscapeDataString", when decode URL use " HttpUtility.UrlDecode"
+[[http://blogs.msdn.com/b/yangxind/archive/2006/11/09/don-t-use-net-system-uri-unescapedatastring-in-url-decoding.aspx][source]] -- 2006 (old)
+
+
+
+OptiRTC.Common.CloudExceptionExtensionMethods.ToQueryString
+uses HttpUtility.UrlEncode()
+
+*** TODO OptiRTC.APIHelpers.Tests.PageResultTests.NativeSkipTokenTop1200Request
+**** results
+         Expected: True
+  But was:  False
+ 
+at OptiRTC.APIHelpers.Tests.PageResultTests.NativeSkipTokenTop1200Request() in c:\projects\optirtcazure-bju5m\OptiRTC.APIHelpers.Tests\PageResultTests.cs:line 77
+*** TODO OptiRTC.APIHelpers.Tests.PageResultTests.NonNativeSkipTokenTop1200Reques
+**** results
+         Expected: True
+  But was:  False
+ 
+at OptiRTC.APIHelpers.Tests.PageResultTests.NonNativeSkipTokenTop1200Request() in c:\projects\optirtcazure-bju5m\OptiRTC.APIHelpers.Tests\PageResultTests.cs:line 45
+*** DONE OptiRTC.MaaS.Tests.SQLPostActionRoutineTests+SQLNonQueryManyParameterGroupsWithTimeLocalizationTests.Failed
+**** results
+System.TimeZoneNotFoundException : The time zone ID 'Coordinated Universal Time' was not found on the local computer.
+   at System.TimeZoneInfo.FindSystemTimeZoneById(String id)
+   at System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime dateTime, String sourceTimeZoneId, String destinationTimeZoneId)
+   at OptiRTC.MaaS.Tests.SQLPostActionRoutineTests.SQLNonQueryManyParameterGroupsWithTimeLocalizationTests.<Failed>d__10a.MoveNext() in c:\projects\optirtcazure-bju5m\OptiRTC.MaaS.Tests\SQLPostActionRoutineTests.cs:line 537
+   at NUnit.Framework.AsyncInvocationRegion.AsyncTaskInvocationRegion.WaitForPendingOperationsToComplete(Object invocationResult)
+   at NUnit.Core.NUnitAsyncTestMethod.RunTestMethod()
+**** notes
+     
+ConvertTimeBySystemTimeZoneId(localTime, "UTC", TimeZoneInfo.Local.Id) -- instead of .StandardName?
+In other places with same two lines of code to get localTime and make utcTime, uses above TimeZoneInfo.Local.Id
+
+Above change passes unit test
+[[http://stackoverflow.com/questions/4235243/how-to-set-timezone-using-powershell][
+Set Time Zone with Powershell]]
+
+[[http://stackoverflow.com/questions/9225701/why-are-some-time-zones-returned-by-getsystemtimezones-not-found-by-findsystemti][SO Answer]]
+***** from stack overflow
+TimeZoneInfo.FindSystemTimeZoneById method accepts the time zone id as parameter. You're using timeZoneInfo.StandardName instead.
+
+It seems, that for these 3 zones values for TimeZoneInfo.StandardName and TimeZoneInfo.Id properties are different. Using this:
+
+TimeZoneInfo.FindSystemTimeZoneById(timeZoneInfo.Id);
+will solve the issue.
+*** Made changes to appveyor.yml
+ 
+**** specified os, processor and configuration, pushed, rebuilding (1.0.11)
+
+interesting: only 47 lines in log (instead of 1900)
+
+Errors and failures:
+OptiTime.OptiTimeTests.OverlapTest
+InvalidTimeZoneException:
+"OptiTimeRange objects can only be instantiated with UTC-kind DateTime objects
+   at OptiTime.OptiTimeRange..ctor(DateTime Utcstart, DateTime Utcend) in c:\dev\optirtcazure\OptiTime\OptiTimeRange.cs:line 87"
+   
+**** removed processor specification, rebuilding (1.0.12)
+**** removed configuration: Release from yml, rebuilding (1.0.13)
+
+Same tests fail, encoding not happening
+
+Notes:
+Microsoft changed the Uri.ToString() to decode between versions
+They reccoment Uri.AbsoluteUri
+[[http://stackoverflow.com/questions/12004214/system-uri-tostring-behaviour-change-after-vs2012-install][source]]
+
+in yaml ->
+Windows Server 2012 R2
+
+OptiRTC.APIHelpers.Tests.dll
+/framework:net-4.5
+
+nunit-console OptiRTC.APIHelpers.Tests.dll /framework:net-4.5
+
+Specified '*\OptiRTC.APIHelpers.Tests.dll'
+need to:
+- add
+- commit
+- push
+
+check re-build
+
+**** rebuild, with correct path to APIHelpers
+
+bju5m
+hard-coded entire path to DLL in order to test framework:net4.5.1
+
+Results:
+Failed.
+
+- nunit did use net4.5
+- ms build built with net4.0
+
+**** using custom build script
+- attempting with custom build_script in order to build with .net 4.5.1
+- still testing with custom test_script
+- maybe needs /tv:4.5.1? -- doesn't work
+
+**** test with net-4.0 instead of net-4.5
+hoping that the CLR will change from 3.5
+
+**** local tests with nunit-console
+**** testing with vstest.console
+only the 1 dll failing tests*
