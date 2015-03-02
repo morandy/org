@@ -6,6 +6,16 @@ The scripts themselves should be in separate files.
 Implement this as a subdirectory in the existing OptiRTC/Devops repository.
 * TODO [#A] Analysis
 ** Provision a new Azure IaaS VM
+*** Possible Solution:
+1. Create VM - [[http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-tutorial/][MSDN]]
+2. Tailor to specifications
+3. Capture Image - [[http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-capture-image-windows-server/][MSDN]]
+4. Create Custom VM From Image - [[http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-create-custom/][MSDN]]
+*** research
+[[http://michaelwasham.com/2012/12/07/windows-azure-iaas-webcast-series-part-four-creating-virtual-machines-with-powershell/][video: Create VM With PowerShell in Azure]]
+[[http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-create-upload-vhd-windows-server/][create vm from VHD]]
+[[http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-capture-image-windows-server/][Capture a VM to Use as a Template]]
+
 *** With the following software on it:
 - Chrome + LastPass
 - LinqPAD 4 (Any PC)
@@ -21,6 +31,7 @@ I know https://www.packer.io/ is probably a good tool for doing this.
 ** Create new Access Control Service Identity
 * TODO Workflow and Disaster Recovery
 [[https://msdn.microsoft.com/en-us/library/azure/dn495240.aspx][MSDN Azure cmdlets]]
+[[https://msdn.microsoft.com/en-us/library/azure/jj554330.aspx][Azure Cmdlet Reference]]
 ** Deploy new SQL database from local .bacpac file or private cloud blob .bacpac, given a connection string of an Azure-compliant SQL database server. :SQL:
 ** Export an entire Azure Table, or collection of <PartitionKey, RowKeyRange> tuples to a CSV file, persisted in either a blob or in a local file :SQL:
 Sample Code from this [[http://blogs.msdn.com/b/jmstall/archive/2012/08/03/converting-between-azure-tables-and-csv.aspx][blog post]]

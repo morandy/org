@@ -1,49 +1,54 @@
 TODO LIST
-* February
-** Week of 2/16
-*** DONE Ask about timecard info
-*** DONE Convert TimeCard/* to org files
-*** DONE Set up Ventra account					  :IMPORTANT:
-    usr morandy
-    pas Hikari1!
-*** TODO fix emacs
-**** TODO set bash.exe as shell
-**** TODO csharp-mode.el
-**** TODO Evil Mode
-     Messing with Org Mode - fix this?
-*** <2015-02-19 Thu 10:37>
-**** TODO Call with Alex
-*** <2015-02-18 Wed 10:00>
-**** DONE check w/ Amanda what to do
-**** DONE learn about appveyor?
+* 2015
+** February
+*** Week of 2/16
+**** DONE Ask about timecard info
+**** DONE Convert TimeCard/* to org files
+**** DONE Set up Ventra account					  :IMPORTANT:
+     usr morandy
+     pas Hikari1!
+**** TODO fix emacs
+***** TODO set bash.exe as shell
+***** TODO csharp-mode.el
+***** TODO Evil Mode
+      Messing with Org Mode - fix this?
+**** <2015-02-19 Thu 10:37>
+***** TODO Call with Alex
+**** <2015-02-18 Wed 10:00>
+***** DONE check w/ Amanda what to do
+***** DONE learn about appveyor?
 
-**** DONE make calendar allerts for licenses
+***** DONE make calendar allerts for licenses
 - vagrant windows key
 - vagrant visual studio key
-*** <2015-02-17 Tue 15:02>
-**** DONE Azure Research					       :DOCS:
+**** <2015-02-17 Tue 15:02>
+***** DONE Azure Research					       :DOCS:
 - in process
 - check up?
-**** DONE Ask Amanda about 30/60/90				       :PING:
+***** DONE Ask Amanda about 30/60/90				       :PING:
 email?
 - ping?
-** Week of 2/23
-*** Wednesday
-**** DONE Debug XAML->JSON
-**** Possibly call joe?
-*** DONE fill out pay form					     :FRIDAY:
-    - Fill out direct deposit form
-    - scan blank check
-      - send to annie?
+*** Week of 2/23
+**** Wednesday
+***** DONE Debug XAML->JSON
+***** Possibly call joe?
+**** DONE fill out pay form					     :FRIDAY:
+     - Fill out direct deposit form
+     - scan blank check
+       - send to annie?
 
 * Long Term
 ** HTML5 Stuff							    :PROJECT:
    :Org File: [[file:~/Documents/org/html5conversion.org][HTML5 Conversion]]
-   :Status:   Put in a pull request
-content      
+   :Gemini:   [[https://optirtc.ongemini.com/workspace/0/item/591][BACK-591]] 
+   :Status:   Put in pull request #55 based upon Amanda's notes
+   :Branch:   XamlConversion
+The Silverlight -> HTML5 conversion wasn't perfect, this project
+is an attempt to better that.      
 ** AppVeyor							    :PROJECT:
    :Org File: [[file:~/Documents/org/appVeyorTests.org][AppVeyor]]
    :Status:   Pending...
+   :Branch:   appVeyorSetup
 *** TODO Add self to notifications in appveyor.yml
 *** TODO research more about notifications in appveyor
 *** How to handle the Monty stuff?
@@ -51,15 +56,21 @@ content
    :Org File: [[file:~/Documents/org/alextask.org][Alex Task]]
    :Status:   Basic research done
 see [[https://mail.google.com/mail/#inbox/14ba2db065fd00cb][email]] with info
-
+Contacted Alex with some initial findings
 
 * IMPORTANT
+** Update ~/Documents/org in git hub (weekly?)
+** Put any written notes into a file
 ** ALWAYS WORK IN SOURCE CONTROL!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Seriously. This is super important.
 
+** Make sure you are working on the correct branch!
+One task/feature per branch
+** NEVER DEVELOPE ON MASTER BRANCH
 * New Vocabulary
-** CMS ?
+** CMS
 [[http://en.wikipedia.org/wiki/Content_management_system][CMS Wiki]]
 Content Management System is a computer application that allows publishing, editing and modifying content, organizing, deleting as well as maintenance from a central interface.[4] Such systems of content management provide procedures to manage workflow in a collaborative environment.[5] These procedures can be manual steps or an automated cascade. CMSs have been available since the late 1990s.
 ** Provision
 the action of providing or supplying something for use.
+** IIS ?

@@ -1,4 +1,5 @@
 :Naming Scheme: ${taskboardID}.json 
+NOTE! Framework 4.5.1 *****
 
 * HTML5
 ** Useful Commands
@@ -121,3 +122,44 @@ Uploaded taskboardJSON.zip
 ** DNA Pod missing title
 Title Blank?
 check, is previous sibling <TextBlock/> ? Get Text attribute
+
+* Notes from Amanda
+- Avoid added complexity / async
+- Don't over-optimize
+- Don't write a function if it is only called once (detracts from readability)
+- use Object in place of class with nothing in it
+- Reference, don't repeat
+- OptiEnviornment contains common things, such as database access
+* TODO Pull request notes [90%]
+** DONE DashboardCS [100%]
+  - [X] If LayoutConfig is an empty class, just use "object" in this dictionary
+** DONE LayoutConfig [100%]
+  - [X] Remove (removed)
+** DONE leftSidebar [100%]
+ - [X] PascaleCase
+** DONE grid [100%]
+ - [X] PascaleCase
+** DONE XamlParser [100%]
+ - [X] GetColumnsOfDashboard()
+ Don't copy methods from code, just reference
+ - [X] GetMainAreaPods()
+ Don't copy methods from code, just reference
+** DONE RowColNode.cs [100%]
+Didn't need to reference, since was used in method which was copied (which was corrected to be a reference)
+ - [X] Don't copy class def, just reference
+** DONE DashboardBuilder [100%]
+ - [X] SetFieldsFromOptiDashboard(...)  
+ Probably doesn't need to be a function, only used once
+ - [X] SetFieldsFromUserGroup(...)
+ Probably doesn't need to be a function, only used once
+** DONE Program.cs [100%]
+ - [X] Interweaving of builder / parser detracts from readability
+** TODO DataClasses1.dbml [0%]
+ - [ ] Use existing edmx in OptiRTC.SqlAccess
+** DONE DatabaseFetcher [100%]
+ - [X] Private membesr should be camelCase
+ - [X] Constructor()
+ Consider pulling whole dashboard EF object + related tables right at the start instead of IDs
+* Improve Database access
+- OptiRTC.SQLAccess
+- Connection String where?
