@@ -1,44 +1,100 @@
 TODO LIST
-* Week of 2/16
-** DONE Ask about timecard info
-** DONE Convert TimeCard/* to org files
-** DONE Set up Ventra account					  :IMPORTANT:
-   usr morandy
-   pas Hikari1!
-** TODO fix emacs
-*** TODO set bash.exe as shell
-*** TODO csharp-mode.el
-*** TODO Evil Mode
-    Messing with Org Mode - fix this?
-** <2015-02-19 Thu 10:37>
-*** TODO Call with Alex
-** <2015-02-18 Wed 10:00>
-*** DONE check w/ Amanda what to do
-*** DONE learn about appveyor?
+* 2015
+** February
+*** Week of 2/16
+**** DONE Ask about timecard info
+**** DONE Convert TimeCard/* to org files
+**** DONE Set up Ventra account					  :IMPORTANT:
+     usr morandy
+     pas Hikari1!
+**** TODO fix emacs
+***** TODO set bash.exe as shell
+***** TODO csharp-mode.el
+***** TODO Evil Mode
+      Messing with Org Mode - fix this?
+**** <2015-02-19 Thu 10:37>
+***** TODO Call with Alex
+**** <2015-02-18 Wed 10:00>
+***** DONE check w/ Amanda what to do
+***** DONE learn about appveyor?
 
-*** DONE make calendar allerts for licenses
+***** DONE make calendar allerts for licenses
 - vagrant windows key
 - vagrant visual studio key
-** <2015-02-17 Tue 15:02>
-*** DONE Azure Research						       :DOCS:
+**** <2015-02-17 Tue 15:02>
+***** DONE Azure Research					       :DOCS:
 - in process
 - check up?
-*** DONE Ask Amanda about 30/60/90				       :PING:
+***** DONE Ask Amanda about 30/60/90				       :PING:
 email?
 - ping?
-* Week of 2/23
-** Wednesday
-*** TODO Debug XAML->JSON
-*** Possibly call joe?
+*** Week of 2/23
+**** Wednesday
+***** DONE Debug XAML->JSON
+***** Possibly call joe?
+**** DONE fill out pay form					     :FRIDAY:
+     - Fill out direct deposit form
+     - scan blank check
+       - send to annie?
 
-** TODO Add self to notifications in appveyor.yml
-** TODO research more about notifications in appveyor
-** TODO fill out pay form 					     :FRIDAY:
-   - Fill out direct deposit form
-   - scan blank check
-     - send to annie?
-   
+** March
+*** Week of 3/2
+**** stuff!
+* Long Term
+** HTML5 Stuff							    :PROJECT:
+   :Org File: [[file:~/Documents/org/html5conversion.org][HTML5 Conversion]]
+   :Gemini:   [[https://optirtc.ongemini.com/workspace/0/item/591][BACK-591]] 
+   :Status:   Merged
+   :Branch:   XamlConversion
+The Silverlight -> HTML5 conversion wasn't perfect, this project
+is an attempt to better that.      
+** AppVeyor							    :PROJECT:
+   :Org File: [[file:~/Documents/org/appVeyorTests.org][AppVeyor]]
+   :Status:   Pending...
+   :Branch:   appVeyorSetup
+*** DONE Add self to notifications in appveyor.yml
+    CLOSED: [2015-03-02 Mon 16:40]
+    - CLOSING NOTE [2015-03-02 Mon 16:40] \\
+      changes from amanda to myself, end result we want to use the optidevs email once it is fully functional
+*** DONE research more about notifications in appveyor
+    CLOSED: [2015-03-03 Tue 09:10]
+    - CLOSING NOTE [2015-03-03 Tue 09:10] \\
+      Emails corrected. (Set currently to my address for testing, set to the optidev account when ready)
+      Involved Webhook which could be customized, if we wanted.
+
+*** How to handle the Monty stuff?
+Are we officially moving to two repos?
+** Alex VM Project						    :PROJECT:
+   :Org File: [[file:~/Documents/org/alextask.org][Alex Task]]
+   :Status:   Basic research done
+see [[https://mail.google.com/mail/#inbox/14ba2db065fd00cb][email]] with info
+Contacted Alex with some initial findings
+** Disaster Recovery						    :PROJECT:
+   :Org File: [[file:~/Documents/org/disasterRecovery.org][Disaster Recovery]]
+   :Status:   Just starting
+   :Branch:   disasterRecovery
+This project is an attempt to automate our disaster recovery process based upon the specifications
+laid out in a google doc. 
+This can also be used in order to set up an automatic key rotation.
+* Weekly
+** Mondays
+- Print Time Sheet ([[https://drive.google.com/a/optirtc.com/file/d/0B8Hyy5IIgaGWcW56NGstUFRjeWdPUUt0WXFSakM5YjljV19B/view?usp=sharing][PDF]])
+- Update ~/Documents/org/ in github
+* IMPORTANT
+** Update ~/Documents/org in git hub (weekly?)
+Monday morning
+** Put any written notes into a file
+** ALWAYS WORK IN SOURCE CONTROL!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Seriously. This is super important.
+
+** Make sure you are working on the correct branch!
+   One task/feature per branch
+** NEVER DEVELOPE ON MASTER BRANCH
+** Don't Write potential infinite loops that go on the cloud!
 * New Vocabulary
-** CMS ?
+** CMS
 [[http://en.wikipedia.org/wiki/Content_management_system][CMS Wiki]]
 Content Management System is a computer application that allows publishing, editing and modifying content, organizing, deleting as well as maintenance from a central interface.[4] Such systems of content management provide procedures to manage workflow in a collaborative environment.[5] These procedures can be manual steps or an automated cascade. CMSs have been available since the late 1990s.
+** Provision
+the action of providing or supplying something for use.
+** IIS ?

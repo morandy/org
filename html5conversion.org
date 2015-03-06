@@ -163,3 +163,22 @@ Didn't need to reference, since was used in method which was copied (which was c
 * Improve Database access
 - OptiRTC.SQLAccess
 - Connection String where?
+
+Value:
+
+metadata=
+  res://*/OptiEntities.csdl|
+  res://*/OptiEntities.ssdl|
+  res://*/OptiEntities.msl;
+    provider=System.Data.SqlClient;
+    provider connection string="Data Source=localhost;Initial Catalog=OptiRTC12;Integrated Security=True"
+
+SQLAccess Query Object?
+
+EF
+Look up "includes"
+
+Refactored to use DataAccess
+
+Consider removing DatabaseFetcher?
+*

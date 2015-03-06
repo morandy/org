@@ -508,3 +508,16 @@ tests 3:00
 
 ** Parallel Testing to speed up unit testing time?
 * Multi-Environmental Tests
+- Can be faster?
+- Results in many files being copied (can we cache?)
+
+* Slow Tests (?)
+
+| Name                                                    | Duration |
+| AnnualAggregation                                       | 1s       |
+| CommandsInParallel_NoTaskDependencies                   | 1s       |
+| Multiple_DataLogs_OneDecisionSpace_AndOneSystemConstant | 1s       |
+| NoDrainageResultsInLoopTermination                      | 7s       |
+| DataPointScripting                                      | 905ms    |
+| FiveOrificesInARowLinearLookup                          | 717ms    |
+|                                                         |          |

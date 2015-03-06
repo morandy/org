@@ -4,8 +4,12 @@ The output for this should be a github wiki page,
 serving as a table of contents and requirements discussion (what is in each) of each script. 
 The scripts themselves should be in separate files. 
 Implement this as a subdirectory in the existing OptiRTC/Devops repository.
-* TODO [#A] Analysis
-** Provision a new Azure IaaS VM
+* Tasks [33%]
+** DONE [#A] Analysis
+   CLOSED: [2015-03-02 Mon 11:55]
+   - CLOSING NOTE [2015-03-02 Mon 11:55] \\
+     Proposed solution, pending acceptance
+Provision a new Azure IaaS VM
 *** Possible Solution:
 1. Create VM - [[http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-tutorial/][MSDN]]
 2. Tailor to specifications
@@ -25,15 +29,55 @@ Implement this as a subdirectory in the existing OptiRTC/Devops repository.
 I can spin them up as readily and easily as possible. 
 I imagine this means figuring out how to build an image of this machine that can then be used everywhere. 
 I know https://www.packer.io/ is probably a good tool for doing this.
-* TODO Deploy new White label 
-** Create new Azure Website
-[[http://azure.microsoft.com/en-us/documentation/articles/web-sites-deploy/][How to Deploy an Azure Website]]
-** Create new Access Control Service Identity
-* TODO Workflow and Disaster Recovery
+** TODO Workflow and Disaster Recovery [33%]
 [[https://msdn.microsoft.com/en-us/library/azure/dn495240.aspx][MSDN Azure cmdlets]]
 [[https://msdn.microsoft.com/en-us/library/azure/jj554330.aspx][Azure Cmdlet Reference]]
-** Deploy new SQL database from local .bacpac file or private cloud blob .bacpac, given a connection string of an Azure-compliant SQL database server. :SQL:
-** Export an entire Azure Table, or collection of <PartitionKey, RowKeyRange> tuples to a CSV file, persisted in either a blob or in a local file :SQL:
+*** DONE Deploy new SQL database from local .bacpac file or private cloud blob .bacpac, given a connection string of an Azure-compliant SQL database server. :SQL:
+   CLOSED: [2015-03-02 Mon 11:53]
+   - CLOSING NOTE [2015-03-02 Mon 11:53] \\
+     Basic research done, have powershell script
+powershell function
+#+NAME: restore-SQLBackup
+#+BEGIN_SRC powershell
+function restore-SQLBackup
+([string]$ConnectionString = $(throw "The ConnectionString parameter is required."), 
+[string]$DatabaseName = $(throw "The databaseName parameter is required."),
+[string]$fileName = $(throw "The fileName parameter is required."), 
+[string]$microsoftSqlServerDacPath = "C:\Program Files (x86)\Microsoft SQL Server\110\DAC\bin\Microsoft.SqlServer.Dac.dll") {
+
+Add-Type -Path $microsoftSqlServerDacPath
+
+$Services = new-object Microsoft.SqlServer.Dac.DacServices $ConnectionString
+
+if ($Services -eq $null)
+{
+    exit
+}
+
+$bacpac = [Microsoft.SqlServer.Dac.BacPackage]::Load($fileName)
+
+$Services.ImportBacpac($bacpac, $DatabaseName)
+
+}
+#+END_SRC
+*** DONE Provision all OptiRTC Tables in an Azure Table Storage Account :SQL:
+    CLOSED: [2015-03-02 Mon 11:57]
+    - CLOSING NOTE [2015-03-02 Mon 11:57]
+#+NAME: List tables in Azure Account
+#+BEGIN_SRC csharp
+CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+CloudTableClient tableClient;
+IEnumerable<CloudTable> tables = tableClient.ListTables();
+#+END_SRC
+
+# Cmdlet: Get-AzureStorageTable
+
+*** DONE Export an entire Azure Table, or collection of <PartitionKey, RowKeyRange> tuples to a CSV file, persisted in either a blob or in a local file :SQL:
+    CLOSED: [2015-03-02 Mon 12:05]
+    - CLOSING NOTE [2015-03-02 Mon 12:05]
+sample using power shell [[http://mmaitre314.github.io/2014/11/25/exporting-an-azure-storage-table-to-a-csv-file-using-powershell.html][blog post]]
+
+
 Sample Code from this [[http://blogs.msdn.com/b/jmstall/archive/2012/08/03/converting-between-azure-tables-and-csv.aspx][blog post]]
 #+NAME: Save Azure Table as CSV
 #+BEGIN_SRC csharp
@@ -46,10 +90,9 @@ var dataFromTable = DataTable.New.ReadAzureTableLazy(Account(), "tableName");
 dataFromTable.SaveToStream(Console.Out);
 
 #+END_SRC
-** Provision all OptiRTC Tables in an Azure Table Storage Account	:SQL:
-** Clear all of the exported data files older than {date} from OptiRTC data export history :SQL:
-** Provision an Access Control Services namespace
-** Provision Redis Cache
+*** TODO Clear all of the exported data files older than {date} from OptiRTC data export history :SQL:
+*** TODO Provision an Access Control Services namespace
+*** TODO Provision Redis Cache
 Info from this [[https://social.msdn.microsoft.com/Forums/azure/en-US/a7976a86-0050-4ada-b644-33af93e28092/how-to-create-redis-cache-using-azure-powershell?forum=azurecache][msdn post]]
 
 Switch to Azure Resource Manager Mode (Switch-AzureMode -Name AzureResourceManager) and you could try the following cmdlets:
@@ -60,9 +103,15 @@ Set-AzureRedisCache
 Remove-AzureRedisCache
 New-AzureRedisCacheKey
 Get-AzureRedisCacheKey
-** Provision a Web Role and Install a Certificate in it
-** Provision a Worker Role and Install a Certificate in it
-** Provision a new Service Bus namespace, and generate non-admin keys with read and read/write permission levels.
-*** (verify that all needed queues and relays are generated by their consuming service on configuration setting change)
+*** TODO Provision a Web Role and Install a Certificate in it
+*** TODO Provision a Worker Role and Install a Certificate in it
+*** TODO Provision a new Service Bus namespace, and generate non-admin keys with read and read/write permission levels.
+**** (verify that all needed queues and relays are generated by their consuming service on configuration setting change)
+AccessRights? (Listen "Read", Listen | Send "Read / Write")
+SharedAccessAuthorization
+** TODO Deploy new White label 
+*** Create new Azure Website
+[[http://azure.microsoft.com/en-us/documentation/articles/web-sites-deploy/][How to Deploy an Azure Website]]
+*** Create new Access Control Service Identity
 
 

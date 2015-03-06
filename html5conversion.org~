@@ -1,9 +1,21 @@
-* script fixing
-** setup
+:Naming Scheme: ${taskboardID}.json 
+NOTE! Framework 4.5.1 *****
+
+* HTML5
+** Useful Commands
+*** Make JSON Pretty
+M-x json-mode (if not on)
+M-x json-pretty-print
+*** Make XML Pretty
+M-x xml-mode (enable syntax)
+M-x sgml-mode
+M-x sgml-pretty-print
+** script fixing
+*** setup
 - corrected SSMS
 - updated master ("$ git pull origin master")
 - 
-** phone notes
+*** phone notes
 - may be issues
 
 publicly navigatable URL for each dashboard
@@ -22,16 +34,16 @@ XAML Math - feature that allows for UI specification to do math on data points b
 JSON - publish version of data already having math done to it?
 Come up with list of data streams and associated calibration operations
 
-** important files/dirs
+*** important files/dirs
 OptiRTCAzure/LINQPad/Curation/
 - XAML-Search-Feature-Use.linq
 - Convert-XAML-to-Json-Dashboards.linq
 OptiRTCAzure/One offs/XamlToJsonDashboardMigration/
 -XamlToJsonDashboardMigration.sln
-** DB reltaion
+*** DB reltaion
 Mapped out in dbml
-** tests
-*** First JSON attempt:
+*** tests
+**** First JSON attempt:
 {
  "id":23,
  "title":"NC State, System Overview",
@@ -51,9 +63,8 @@ Mapped out in dbml
  "specVersion":1
 }
 
-
-* DONE refactor
-** DONE Make XAML parsing separate class
+** DONE refactor
+*** DONE Make XAML parsing separate class
 4 Errors:
 - ConfigureXML()
 - SetDashboardActiveLayout() -- change, needs bool "has sidepanel"
@@ -63,11 +74,10 @@ Mapped out in dbml
 
 bool setXaml (checks "is empty"
 
-* XAML -> C# -> JSON
-:NOTE: M-x json-pretty-print
-** availableTimeSpams
+** XAML -> C# -> JSON
+*** availableTimeSpams
 Defaulted to [ 1, 2, 3, 4 ] in constructors of any pod that used this
-** gaugePod
+*** gaugePod
 added check for title to address "untitled Latest Value & Trend Pod"
 - If there is a ":" in the Text, split()[0], otherwise, use the Text
 #+NAME: hack fix to names
@@ -87,9 +97,87 @@ if(textBlock != null && textBlock.Name == "TextBlock")
     }
 }
 #+END_SRC
-*** Possible Errors
+**** Possible Errors
 Previous child is an xml comment, !--
 - fix: if finds !-- in the outter xml, goes back one more sibling.
-** Find bugs in JSON						       :BUGS:
+*** Find bugs in JSON						       :BUGS:
 Known issues are things not finding "Title", possible due to comments in XAML
+- This is partially due to XAML being man-made, so the layout isn't 100% consistant,
+  which makes it difficult to parse programatically perfectly
+** Conversion Notes from Scott S
+*** fixes worked on
+- pulling the labels/titles/etc from XAML, data ranges, etc
+*** datastream related
+Included on Drive is math.csv, in which is a list of datastreams with math in them
+- taking custom XAML math, turning it into backend calculations for datastreams
+- fixing metadata with proper units
+** DONE Naming Convention
+- Ask what naming convention is for JSON files and change Program.cs, if needed
+Alex: 
+"that works - in production that data is persisted as a property of a record 
+not as a file so as long as we can identify the content that's all that matters" 
+** Last bits?
+Anything else before "good"?
+Uploaded taskboardJSON.zip
+** DNA Pod missing title
+Title Blank?
+check, is previous sibling <TextBlock/> ? Get Text attribute
 
+* Notes from Amanda
+- Avoid added complexity / async
+- Don't over-optimize
+- Don't write a function if it is only called once (detracts from readability)
+- use Object in place of class with nothing in it
+- Reference, don't repeat
+- OptiEnviornment contains common things, such as database access
+* TODO Pull request notes [90%]
+** DONE DashboardCS [100%]
+  - [X] If LayoutConfig is an empty class, just use "object" in this dictionary
+** DONE LayoutConfig [100%]
+  - [X] Remove (removed)
+** DONE leftSidebar [100%]
+ - [X] PascaleCase
+** DONE grid [100%]
+ - [X] PascaleCase
+** DONE XamlParser [100%]
+ - [X] GetColumnsOfDashboard()
+ Don't copy methods from code, just reference
+ - [X] GetMainAreaPods()
+ Don't copy methods from code, just reference
+** DONE RowColNode.cs [100%]
+Didn't need to reference, since was used in method which was copied (which was corrected to be a reference)
+ - [X] Don't copy class def, just reference
+** DONE DashboardBuilder [100%]
+ - [X] SetFieldsFromOptiDashboard(...)  
+ Probably doesn't need to be a function, only used once
+ - [X] SetFieldsFromUserGroup(...)
+ Probably doesn't need to be a function, only used once
+** DONE Program.cs [100%]
+ - [X] Interweaving of builder / parser detracts from readability
+** TODO DataClasses1.dbml [0%]
+ - [ ] Use existing edmx in OptiRTC.SqlAccess
+** DONE DatabaseFetcher [100%]
+ - [X] Private membesr should be camelCase
+ - [X] Constructor()
+ Consider pulling whole dashboard EF object + related tables right at the start instead of IDs
+* Improve Database access
+- OptiRTC.SQLAccess
+- Connection String where?
+
+Value:
+
+metadata=
+  res://*/OptiEntities.csdl|
+  res://*/OptiEntities.ssdl|
+  res://*/OptiEntities.msl;
+    provider=System.Data.SqlClient;
+    provider connection string="Data Source=localhost;Initial Catalog=OptiRTC12;Integrated Security=True"
+
+SQLAccess Query Object?
+
+EF
+Look up "includes"
+
+Refactored to use DataAccess
+
+Consider removing DatabaseFetcher?

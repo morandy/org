@@ -1,0 +1,13 @@
+* Disaster Recovery Project
+ :PROPERTIES:
+ :Doc:      [[https://docs.google.com/a/optirtc.com/document/d/1SwuEz6d6fmXQrK0lBoFuZswUo6jtYBE8Y8cukDTufPw/edit#][Disastery Recovery Steps]]
+ :END:
+
+
+
+* Notes
+** Call with amanda from <2015-03-03 Tue 11:04>
+Specs to come
+Use Credential Store UtilityApp as possible
+Get familiar with credential store
+Use those credentials as a basis for what needs to be done to recover

@@ -37,36 +37,86 @@ email?
      - scan blank check
        - send to annie?
 
+** March
+*** Week of 3/2
+**** stuff!
+*** Week of 3/9
+*** Week of 3/16
+Amanda in Boston until 3/23
+Kurt out 3/20 (all alone)
+*** Week of 3/23
+Roslynn Starts
 * Long Term
-** HTML5 Stuff							    :PROJECT:
+#+TODO: TODO ONGOING BACKBURNER PULLREQUEST | DONE CANCELED
+** DONE HTML5 Stuff						    :PROJECT:
+   CLOSED: [2015-03-04 Wed 10:55]
+   - CLOSING NOTE [2015-03-04 Wed 10:55] \\
+     Pull request #55 merged
    :Org File: [[file:~/Documents/org/html5conversion.org][HTML5 Conversion]]
    :Gemini:   [[https://optirtc.ongemini.com/workspace/0/item/591][BACK-591]] 
-   :Status:   Put in pull request #55 based upon Amanda's notes
+   :Status:   Merged
    :Branch:   XamlConversion
 The Silverlight -> HTML5 conversion wasn't perfect, this project
 is an attempt to better that.      
-** AppVeyor							    :PROJECT:
+** TODO Key Rotation
+   :Org File: [[file:~/Documents/org/keyRotation.org][Key Rotation]]
+   :Gemini:   TBD 
+   :Status:   Started...
+   :Branch:   keyRotation
+   :Repo:     OptiPlatform
+This project will be used to improve security by rotating our shared access keys.
+** ONGOING AppVeyor						    :PROJECT:
    :Org File: [[file:~/Documents/org/appVeyorTests.org][AppVeyor]]
    :Status:   Pending...
    :Branch:   appVeyorSetup
-*** TODO Add self to notifications in appveyor.yml
-*** TODO research more about notifications in appveyor
+   :Repo:     OptiRTCAzure
+*** DONE Add self to notifications in appveyor.yml
+    CLOSED: [2015-03-02 Mon 16:40]
+    - CLOSING NOTE [2015-03-02 Mon 16:40] \\
+      changes from amanda to myself, end result we want to use the optidevs email once it is fully functional
+*** DONE research more about notifications in appveyor
+    CLOSED: [2015-03-03 Tue 09:10]
+    - CLOSING NOTE [2015-03-03 Tue 09:10] \\
+      Emails corrected. (Set currently to my address for testing, set to the optidev account when ready)
+      Involved Webhook which could be customized, if we wanted.
+
 *** How to handle the Monty stuff?
-** Alex VM Project						    :PROJECT:
+Are we officially moving to two repos?
+** BACKBURNER Alex VM Project					    :PROJECT:
    :Org File: [[file:~/Documents/org/alextask.org][Alex Task]]
    :Status:   Basic research done
 see [[https://mail.google.com/mail/#inbox/14ba2db065fd00cb][email]] with info
 Contacted Alex with some initial findings
-
+** BACKBURNER Disaster Recovery					    :PROJECT:
+   :Org File: [[file:~/Documents/org/disasterRecovery.org][Disaster Recovery]]
+   :Status:   back-burner
+   :Branch:   disasterRecovery
+This project is an attempt to automate our disaster recovery process based upon the specifications
+laid out in a google doc. 
+This can also be used in order to set up an automatic key rotation.
+* Weekly
+** Mondays
+- Print Time Sheet ([[https://drive.google.com/a/optirtc.com/file/d/0B8Hyy5IIgaGWcW56NGstUFRjeWdPUUt0WXFSakM5YjljV19B/view?usp=sharing][PDF]])
+- Update ~/Documents/org/ in github
 * IMPORTANT
 ** Update ~/Documents/org in git hub (weekly?)
+Monday morning
+** Org File Naming Convention
+Use camelCase, just so it is standard
 ** Put any written notes into a file
 ** ALWAYS WORK IN SOURCE CONTROL!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Seriously. This is super important.
 
 ** Make sure you are working on the correct branch!
-One task/feature per branch
+   One task/feature per branch
 ** NEVER DEVELOPE ON MASTER BRANCH
+** Don't Write potential infinite loops that go on the cloud!
+* Personal Goals
+** Give clear/concise answers
+i.e. when asked a question, it's okay to pause to think (rather than just talking to fill
+while thinking of the answer)
+
+** Take more/detailed noted to help facilitate above
 * New Vocabulary
 ** CMS
 [[http://en.wikipedia.org/wiki/Content_management_system][CMS Wiki]]

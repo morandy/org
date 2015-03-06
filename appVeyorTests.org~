@@ -1,5 +1,8 @@
-* 20 errors, all "Metadata file '...' could not be found"
-** errors:
+#+STARTUP: lognotedone
+
+* Older AppVeyor [50%]
+** 20 errors, all "Metadata file '...' could not be found"
+*** errors:
 Error	10	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.MaaS\bin\Debug\OptiRTC.MaaS.dll' could not be found	C:\src\OptiRTCAzure\DataProcessorRole\CSC	DataProcessorRole
 Error	47	Metadata file 'C:\src\OptiRTCAzure\DataProcessorRole\bin\Debug\DataProcessorRole.dll' could not be found	C:\src\OptiRTCAzure\DataProcessorRole.Tests\CSC	DataProcessorRole.Tests
 Error	48	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.MaaS\bin\Debug\OptiRTC.MaaS.dll' could not be found	C:\src\OptiRTCAzure\DataProcessorRole.Tests\CSC	DataProcessorRole.Tests
@@ -20,7 +23,7 @@ Error	3	Metadata file 'C:\src\OptiRTCAzure\WindowsAzure.Acs.Oauth2\bin\Debug\Win
 Error	12	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.DelegatingHandler\bin\Debug\OptiRTC.DelegatingHandler.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.Public.Http\CSC	OptiRTC.Public.Http
 Error	21	Metadata file 'C:\src\OptiRTCAzure\OptiRTC.Public.Http\bin\OptiRTC.Public.Http.dll' could not be found	C:\src\OptiRTCAzure\OptiRTC.Public.Http.Tests\CSC	OptiRTC.Public.Http.Tests
 Error	2	Metadata file 'C:\src\OptiRTCAzure\FluentACS\bin\Debug\FluentACS.dll' could not be found	C:\src\OptiRTCAzure\WindowsAzure.Acs.Oauth2\CSC	WindowsAzure.Acs.Oauth2
-** missing dlls
+*** missing dlls
 MaaS.dll
 DataProcessorRole.dll
 DelegatingHandler.dll
@@ -30,27 +33,27 @@ Http.dll
 Calculations.dll
 FluentACS.dll
 
-* enviornment-setup.bat
+** enviornment-setup.bat
 - failures?
 R.Project v2.15.0
 
-* DONE double-check sln
+** DONE double-check sln
 - make sure that all projects named *.test are included in this test solution
 - make sure that related project to test is also included
 
-** added
+*** added
 OptiRTC.Events.Tests
 OptiRTC.ProcessingObjects.Tests
 
-** after add
+*** after add
 rebuilt - 24 warnings
 
 *
 
-* TODO tests
+** TODO tests
 
-** alex tasks - Moved to own org file
-*** Anaysis -- most important
+*** alex tasks - Moved to own org file
+**** Anaysis -- most important
 VM with: Chrome + LastPass, LinqPAD 4, 
 
 Store image of PC on BLOB
@@ -58,63 +61,63 @@ packer.io - scripting installs?
 
 Use Case:
 Fire up N machines, run, get files
-*** Azure Cmdlets
+**** Azure Cmdlets
 Needed, get familiar
-**** Clear all of the exported data files older than {date} from OptiRTC data export history
+***** Clear all of the exported data files older than {date} from OptiRTC data export history
 
-** My Build
+*** My Build
 Assumption: All underlying code is correct, tests are incorrect
-*** DONE JSonSerialize
+**** DONE JSonSerialize
 JSON files are different - coded output vs embeded json file
 See diff - probably just "Json spec modified since initial implementation." as the unit test says
-**** ask alex about JSON
+***** ask alex about JSON
 While he's on the phone
 (files don't match)
 more concerned with if the models are the same rather than the actual data
 
 Git history on test data file, diff those, see if something changed?
-*** DONE "%0D" related issues
+**** DONE "%0D" related issues
 
 Show amanda, RFC link, the %0D
 
-**** Ideas 
+***** Ideas 
 In EventUtilities - add a "new lines" variable that can be inserted ("%0D") as needed and also regex'd for?
 Because mailTo? (RFC 2368), requires characters in URLs be encoded, line breaks MUST be encoded with "%0D%0A".
 [[https://www.ietf.org/rfc/rfc2368.txt][RFC 2368]] - section "5. Encoding"
-**** notes
+***** notes
 Ignore below, data just stored, only cares if splitting on the delimiter
 GetBodyWithoutMailIdentifiers(...) returns "TestMessage.%0D" -- if built with BuildEventMailBodyIdentifer(...)
 -- has no unit test?
 
-**** DONE BuildStandard
+***** DONE BuildStandard
 "%0D" -- carriage return (hex for 13)
 
 Changed StartsWith to look for ("%0D--------------------------------------") instead of "--------------------------------------"
 Changed Regex to "%0D" from "\r\n|\r|\n"
 Added 1 to indexes for Splits, [0] = ""
 
-***** actions
+****** actions
 Changed unit test to search for "%0D"
 Changed some asserts from IsTrue to AreEqual in order to get better results
 Added messages to ambiguous tests
 
-**** DONE ParseCorrectMessage
+***** DONE ParseCorrectMessage
 Bug caused by "%0D"
 Added messages to ambiguous tests
-***** TryParseEventMailIdentifiers
+****** TryParseEventMailIdentifiers
 135 - Split on "\r\n|\r|\n" only gets 1 line, full of junk
 141 - TryParse returns false, 
 
-**** DONE ParseCorrectMessageWithEmptyAction
+***** DONE ParseCorrectMessageWithEmptyAction
 Added messages to ambiguous tests
-**** EventUtilities.TryParseEventMailIdentifiers
+***** EventUtilities.TryParseEventMailIdentifiers
 Changed regex expr to "%0D" from "\r\n|\r|\r"
 
-*** Build Results
+**** Build Results
 - Pushed branch, running tests
 - CLR Version: (Net 3.5) ???
 - 
-** AppVeyor Tests
+*** AppVeyor Tests
 For PageResulstsTests, added more detailed message to Assert.IsTrue(), what we are looking for {0} and what we are looking in {1}
 
 Tests failing:
@@ -124,7 +127,7 @@ Was      "$skiptoken=1000$top=200"
 %24 == $ 
 [[http://www.w3schools.com/tags/ref_urlencode.asp][url encoding]] $ encodes to %24
 
-*** notes on encoding
+**** notes on encoding
 use: Uri.EscapeDataString, not HttpUtility.UrlEncode
 EscapeUriString() -- if what we're escaping is a URI
 
@@ -151,27 +154,27 @@ It is recommended that when encode URL use "System.Uri.EscapeDataString", when d
 OptiRTC.Common.CloudExceptionExtensionMethods.ToQueryString
 uses HttpUtility.UrlEncode()
 
-*** TODO OptiRTC.APIHelpers.Tests.PageResultTests.NativeSkipTokenTop1200Request
-**** results
+**** TODO OptiRTC.APIHelpers.Tests.PageResultTests.NativeSkipTokenTop1200Request
+***** results
          Expected: True
   But was:  False
  
 at OptiRTC.APIHelpers.Tests.PageResultTests.NativeSkipTokenTop1200Request() in c:\projects\optirtcazure-bju5m\OptiRTC.APIHelpers.Tests\PageResultTests.cs:line 77
-*** TODO OptiRTC.APIHelpers.Tests.PageResultTests.NonNativeSkipTokenTop1200Reques
-**** results
+**** TODO OptiRTC.APIHelpers.Tests.PageResultTests.NonNativeSkipTokenTop1200Reques
+***** results
          Expected: True
   But was:  False
  
 at OptiRTC.APIHelpers.Tests.PageResultTests.NonNativeSkipTokenTop1200Request() in c:\projects\optirtcazure-bju5m\OptiRTC.APIHelpers.Tests\PageResultTests.cs:line 45
-*** DONE OptiRTC.MaaS.Tests.SQLPostActionRoutineTests+SQLNonQueryManyParameterGroupsWithTimeLocalizationTests.Failed
-**** results
+**** DONE OptiRTC.MaaS.Tests.SQLPostActionRoutineTests+SQLNonQueryManyParameterGroupsWithTimeLocalizationTests.Failed
+***** results
 System.TimeZoneNotFoundException : The time zone ID 'Coordinated Universal Time' was not found on the local computer.
    at System.TimeZoneInfo.FindSystemTimeZoneById(String id)
    at System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime dateTime, String sourceTimeZoneId, String destinationTimeZoneId)
    at OptiRTC.MaaS.Tests.SQLPostActionRoutineTests.SQLNonQueryManyParameterGroupsWithTimeLocalizationTests.<Failed>d__10a.MoveNext() in c:\projects\optirtcazure-bju5m\OptiRTC.MaaS.Tests\SQLPostActionRoutineTests.cs:line 537
    at NUnit.Framework.AsyncInvocationRegion.AsyncTaskInvocationRegion.WaitForPendingOperationsToComplete(Object invocationResult)
    at NUnit.Core.NUnitAsyncTestMethod.RunTestMethod()
-**** notes
+***** notes
      
 ConvertTimeBySystemTimeZoneId(localTime, "UTC", TimeZoneInfo.Local.Id) -- instead of .StandardName?
 In other places with same two lines of code to get localTime and make utcTime, uses above TimeZoneInfo.Local.Id
@@ -181,16 +184,16 @@ Above change passes unit test
 Set Time Zone with Powershell]]
 
 [[http://stackoverflow.com/questions/9225701/why-are-some-time-zones-returned-by-getsystemtimezones-not-found-by-findsystemti][SO Answer]]
-***** from stack overflow
+****** from stack overflow
 TimeZoneInfo.FindSystemTimeZoneById method accepts the time zone id as parameter. You're using timeZoneInfo.StandardName instead.
 
 It seems, that for these 3 zones values for TimeZoneInfo.StandardName and TimeZoneInfo.Id properties are different. Using this:
 
 TimeZoneInfo.FindSystemTimeZoneById(timeZoneInfo.Id);
 will solve the issue.
-*** Made changes to appveyor.yml
- 
-**** specified os, processor and configuration, pushed, rebuilding (1.0.11)
+**** Made changes to appveyor.yml
+  
+***** specified os, processor and configuration, pushed, rebuilding (1.0.11)
 
 interesting: only 47 lines in log (instead of 1900)
 
@@ -200,8 +203,8 @@ InvalidTimeZoneException:
 "OptiTimeRange objects can only be instantiated with UTC-kind DateTime objects
    at OptiTime.OptiTimeRange..ctor(DateTime Utcstart, DateTime Utcend) in c:\dev\optirtcazure\OptiTime\OptiTimeRange.cs:line 87"
    
-**** removed processor specification, rebuilding (1.0.12)
-**** removed configuration: Release from yml, rebuilding (1.0.13)
+***** removed processor specification, rebuilding (1.0.12)
+***** removed configuration: Release from yml, rebuilding (1.0.13)
 
 Same tests fail, encoding not happening
 
@@ -226,7 +229,7 @@ need to:
 
 check re-build
 
-**** rebuild, with correct path to APIHelpers
+***** rebuild, with correct path to APIHelpers
 
 bju5m
 hard-coded entire path to DLL in order to test framework:net4.5.1
@@ -237,14 +240,271 @@ Failed.
 - nunit did use net4.5
 - ms build built with net4.0
 
-**** using custom build script
+***** using custom build script
 - attempting with custom build_script in order to build with .net 4.5.1
 - still testing with custom test_script
 - maybe needs /tv:4.5.1? -- doesn't work
 
-**** test with net-4.0 instead of net-4.5
+***** test with net-4.0 instead of net-4.5
 hoping that the CLR will change from 3.5
 
-**** local tests with nunit-console
-**** testing with vstest.console
+***** local tests with nunit-console
+***** testing with vstest.console
 only the 1 dll failing tests*
+* New Research [0%]
+** Parallel Testing
+*** Requirements
+- Premium and Enterprise plans (2 and 4 concurrent jobs)
+*** Test Categories
+#+NAME: NUnit TestFixture example
+#+BEGIN_SRC cs
+[TestFixture, Category("MontyCode")]
+public class OneOfMontysTests
+{
+}
+#+END_SRC
+#+NAME: NUnit Test Method example
+#+BEGIN_SRC cs
+[TestFixture]
+public class MontyTests
+{
+  [Test, Category("MontyTest")]
+  public void OneOfMontysTests
+  {
+  }
+}
+#+END_SRC
+*** Example
+see [[http://www.appveyor.com/docs/parallel-testing][parallel testing]] on appveyor's site
+#+NAME: appveylor.yml example
+#+BEGIN_SRC yml
+test:
+  categories:
+    - Common    # category for all jobs
+    - [UI]      # 1st job
+    - [DAL, BL] # second job
+#+END_SRC
+
+
+** Notifications
+Can have multiple notifications set up, with conditions (i.e. on_build_failer: True)
+#+NAME: appveyor.yml sample
+#+BEGIN_SRC yml
+notifications:
+  - provider: Email
+    to : ... etc
+    on_build_failure: True
+  - provider: Webhook
+    url: http://www.myhook.com
+#+END_SRC
+*** DONE Emails							       :TEST:
+
+
+Can send email(s) to specified address(es) 
+
+Customize message body to match Amanda's
+subject: Build {status}: {Build info}
+message: 
+  {link to build}
+  Commit {commit #} by {committer} on {date}
+  {Commit message}
+
+*** Webhooks
+- Best bet for custom handling of notifications will be with Webhooks?
+- Listen to POST with the specified JSON and handle accordingly
+#+NAME: JSON body
+#+BEGIN_SRC json
+{
+   "eventName":"build_success",
+   "eventData":{
+      "passed":true,
+      "failed":false,
+      "status":"Success",
+      "started":"2014-04-14 7:57 PM",
+      "finished":"2014-04-14 7:58 PM",
+      "duration":"00:01:30.3741236",
+      "projectId":12064,
+      "projectName":"test-web",
+      "buildId":14636,
+      "buildNumber":26,
+      "buildVersion":"1.0.26",
+      "repositoryProvider":"gitHub",
+      "repositoryScm":"git",
+      "repositoryName":"JohnSmith/test-web",
+      "branch":"master",
+      "commitId":"ad2366f0c4",
+      "commitAuthor":"John Smith",
+      "commitAuthorEmail":"john@smith.com",
+      "commitDate":"2014-04-14 1:54 AM",
+      "commitMessage":"Some changes to appveyor.yml",
+      "committerName":"John Smith",
+      "committerEmail":"john@smith.com",
+      "isPullRequest":true,
+      "pullRequestId":1,
+      "buildUrl":"https://ci.appveyor.com/project/JohnSmith/test-web/build/1.0.26",
+      "notificationSettingsUrl":"https://ci.appveyor.com/notifications",
+      "messages":[],
+      "jobs":[
+         {
+            "id":"es941edratul5jm3",
+            "name":"",
+            "passed":true,
+            "failed":false,
+            "status":"Success",
+            "started":"2014-04-14 7:57 PM",
+            "finished":"2014-04-14 7:58 PM",
+            "duration":"00:01:27.9060155",
+            "messages":[
+
+            ],
+            "compilationMessages":[
+               {
+                  "category":"warning",
+                  "message":"Found conflicts between different versions of the same dependent assembly....",
+                  "details":"MSB3247",
+                  "fileName":"..\\..\\Program%20Files%20(x86)\\MSBuild\\12.0\\bin\\Microsoft.Common.CurrentVersion.targets",
+                  "line":1635,
+                  "column":5,
+                  "projectName":"MyWebApp",
+                  "projectFileName":"MyWebApp\\MyWebApp.csproj",
+                  "created":"2014-04-14T19:57:54.0838622+00:00"
+               }
+            ],
+            "artifacts":[
+               {
+                  "fileName":"MyWebApp.zip",
+                  "name":"MyWebApp",
+                  "type":"WebDeployPackage",
+                  "size":3491576,
+                  "url":"https://ci.appveyor.com/api/buildjobs/es941edratul5jm3/artifacts/token/261761baaaa8337f0a13fa8b5587451ff2d13e4cff095c74e6eabb5d5dea0909/MyWebApp.zip"
+               }
+            ]
+         }
+      ]
+   }
+}
+#+END_SRC
+Note: eventName can be only build_success or build_failure
+** Build Specified SLN
+*** Testing...
+Needed corrections to project, queued to build
+specified in appveyor.yml to build only my project:
+#+NAME: appveyor.yml
+#+BEGIN_SRC yml
+# building only my project, specified in SLN
+build:
+  verbosity: minimal
+  project: One offs\XamlToJsonDashboardMigration\XamlToJsonDashboardMigration.sln
+#+END_SRC
+
+*** Findings
+This works! The .yml at the root can specifiy a .sln anywhere in order to build that portion
+of the project. (additionally, different notificatoins could be set up for this)
+** Speed up nuGet
+Possibilities:
+*** Check in packages to git? (200mb of 3.4gb ~5%)
+*** custom nuget feed?
+- Alex mentioned something like this in his task for creating custom simulation VMs,
+but that was for specifically opti dlls
+*** DONE build cache						       :TEST:
+ Use Cases: NuGet "packages" folder
+
+#+NAME: cache example
+#+BEGIN_SRC yml
+
+cache:
+  - packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
+
+#+END_SRC
+
+NB: Build must be successful in order for cache to be updated!
+Test this!?
+
+Testing is promising with this!
+
+** Exit Code 128
+   Random git error
+** Duplicate builds when pull request?
+- Do we want to do anything about this?
+*** Skip via commit message
+ add [skip ci] or [ci skip] to commit message and build won't be triggered by appveyor
+*** filter branches via yml
+[[http://www.appveyor.com/docs/branches][AppVeyor Docs: Branches and Tags]]
+
+#+NAME: ignore master
+#+BEGIN_SRC yml
+branches:
+  except:
+    - master
+#+END_SRC
+** TODO Custom build script					       :TEST:
+Does this detect all needed tests?
+
+* Current Tests
+** Testing defaul message (also has in "cache" packages, see if this picks up on next build)
+** Test build script, specify two SLN, see if it gets the requisite tests
+** Insert Time stamp into build
+*** Summary
+| Task        | Avg Time |
+| Clone       |          |
+| Clone+Cache |          |
+| Build       |          |
+| Build+Cache |          |
+| Test        |          |
+
+*** build 1 w/ cache
+start: 21:12:42
+build: 21:14:18
+after: 21:16:16
+end:   21:19:39
+total time -- ~7 minutes, 
+1:36 to clone/cache
+1:58 to build
+3:23 to test
+*** build 2 w/ cache
+start: 21:19:43
+build: 21:21:24
+after: 21:23:33
+end:   21:27:01
+total time -- ~7.5 minutes 
+1:40 to clone/cache
+2:09 to build
+3:28 to test
+*** build 3 w/out cache
+start: 21:27:07
+build: 21:28:22
+after: 21:36:11
+end:
+total time --
+1:15 to clone (no cache)
+7:49 to build
+*** build 4 w/ cache and check for change in package.config
+start: 21:52:31
+build: 21:54:55 ** Skip restoring "packages" as one of the dependencies changed
+after: 22:03:07 
+end:   22:06:45
+total
+
+clone 2:24
+build 8 minutes
+test ;
+
+Where is **\packages.config? Or why does it not exist?
+What can we look at to track packages changing?
+
+*** built 5 w/ cache and check for change in package.config
+start: 22:06:50
+build: 22:09:47
+after: 22:11:51
+end:   22:14:51
+total
+
+
+build 2:04
+tests 3:00
+
+*** build 6 w/out cache
+
+
+** Parallel Testing to speed up unit testing time?
+* Multi-Environmental Tests

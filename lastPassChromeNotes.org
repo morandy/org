@@ -1,0 +1,30 @@
+:TITLE: Opti IT Workshop - Last Pass and Chrome
+
+* Notes
+
+** Chrome
+- Default Browser
+- Split tabs into different windows
+- Multiple "Persons" signed in with different windows via "Switch Person"
+
+*** extensions
+[[chrome://extensions][Extensions]]
+- Google doc extensions allow offline editing
+- Merge Conflicts? (caused by offline editing)
+- "Office Editing for Docs, Sheets & Slides"
+  Allows working with MS Office Docs in Google
+
+*** keyboard shortcuts
+- C-TAB (cycle tabs)
+- C-TAB# (go to tab #)
+- C-T (shift-t) (re-open recently closed tab)
+-
+** LastPass
+- When looking for a password, you don't have to explicitly navigate to it,
+  You can start typing in the search field (fuzzy) and it will find it.
+- Offers Password Generation (if signed in to LastPass)
+- Number in * from LastPass is the number of passwords associated with
+  that domain.
+- "Never remember me" / save password in Chrome
+- 
+*** Shared Folder
