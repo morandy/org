@@ -1,19 +1,45 @@
 Key Rotation Project
 
-* flow
+* TODO List [60%]
+** TODO Add unit test coverage [16%]
+- [ ] ServiceConfiguration
+- [ ] StorageServiceUtilities
+- [X] VersionComparer
+- [ ] AzureCredentials
+- [ ] AzureBlobStorage
+- [ ] AzureAccountInfo
+  - [ ] ServiceBusInfo
+  - [ ] StorageAccountInfo
+** TODO Refactoring [0%]
+*** TODO StorageServiceUtilities [40%]
+- [X] unified credential access
+- [X] simplify methods, extract common HTTP code
+  - This needs to be redone, probably for a genaric stream instead of XDocument ?
+- [ ] change "magic" values to consts/config settings
+- [ ] clean up code (very, very messy)
+- [ ] Make "void" methods return "String" of the response body?
 
-- Get list of <service-name>s
-- foreach(service-name)
-  - Get Storage Account Keys for service-name
-  - Get all things using service-name
-  - Determine which key we are using (Key A)
-  - Broadcast other key as new key (Key B)
-  - Update JSON
-  - Regenerate (Key A) for service-name
-
-* methods
-- Make request
-- handle response
+*** TODO KeyRotationForm [0%]
+- [ ] btnCheckKeys_Click()
+  - [ ] Abstract the loop more / StorageAccountInfo (?)
+- [ ] generateNeyKeys()
+  - [ ] Abstract this functionality to class
+*** TODO Unit Tests [0%]
+- [ ] More tests!
+- [ ] Clean up, add "harnessy"/setup methods
+** DONE Add encrypted file to storage blob in KeyRotationForm
+   CLOSED: [2015-03-10 Tue 12:42]
+   - CLOSING NOTE [2015-03-10 Tue 12:42] \\
+     Done - changed AzureBlobStorage to encrypt the blob it adds
+** DONE Get CryptoTools Working
+   CLOSED: [2015-03-10 Tue 10:52]
+   - CLOSING NOTE [2015-03-10 Tue 10:52] \\
+     Needed to build in submodule in order to have nuget create needed packages
+** DONE Research updating Service Bus SAS
+   CLOSED: [2015-03-10 Tue 10:17]
+   - CLOSING NOTE [2015-03-10 Tue 10:17] \\
+     This functionality has been added. See SharedAccessAuthorizationRule class
+     and related documentation
 
 * access needed
 Certificate
@@ -53,3 +79,146 @@ Project Storage
 ** 4. Store newly generated keys in a copy of the original credential store used to populate the list
 * Tests!
 Make sure to write tests and test things.
+* Questions
+rename Program.cs ?
+
+CredentialStoreItem
+* Test Azure Info
+subscriptionID: 8623d538-e323-4ea7-872b-2589d5e4a3ce
+
+storage: optiteststorage
+
+path to app.config with encryption key:
+C:\src\OptiRTCAzure\OptiRTC.CredentialManagement.AdminHost\app.config
+
+CryptoTools.SymmetricEncrypt(string plainTextToEncrypt, byte[] cryptKey)
+^ cryptKey is just the Convert.ToBase64(keyvalue)
+
+configuration/
+ appSettings
+  add key="symmetricKey" value="keyvaluethatweneed"
+
+* Update Workflow
+
+[[https://docs.google.com/a/optirtc.com/document/d/1FX1xqKNKd9b83J4LVygOwlsll8XKibaNDpodn_RNhcY/edit][Credential Management Specs]]
+[[https://www.websequencediagrams.com/][Diagraming Tool]]
+
+* TODO Match Specifications
+** Key Rotation
+*** TABLE STORAGE
+1. [ ] Provide user with a list of all accounts in the ProjectStorage scope
+2. [ ] Indicate the current key type (primary/secondary) for storage account
+3. [ ] select any or all accounts and generate a new primary/secondary key
+4. [ ] store new keys in copy of original credential store used to populate list
+*** SERVICE BUS
+1. [X] Key rotation uses SAS
+2. [ ] Provide user with *DISTINCT* list of all service bus connection strings "Endpoint=sb://"
+3. [ ] Indicate if primary/secondary
+4. [ ] Allow user to select any/all connection strings and generate new primary/secondary keys
+5. [ ] store newly generated keys in copy of original credential store file
+   - IMPORTANT: Make sure to update ALL values using each connection string
+
+*** Common
+- Get list of keys (with certain specification)
+  - IN: credential JSON file, type
+  - OUT: list of keys of type
+- Indicate key type
+  - IN: list of keys<T>
+  - OUT: primary/secondary ?
+- generate new primary/secondary key for selection
+  - IN: list of keys<T>
+  - OUT: updated list of keys<T>
+- store new keys in copy of original credential store used to get list
+  - IN: list of keys<T>
+  - OUT: file
+
+*** Extensions
+- Add support for Redis Keys
+
+** Deployment
+
+*** USE EXISTIGN ENCRYPTION KEY
+1. [ ] Encrypt updated credential store using symmetric key in OptiRTC.CredentialManagement.AdminHost/app.config file
+2. [ ] Upload encrypted store to the OptiCredentials storage account, credentials blob container
+   1. [ ] Naming convention = "credentials-v{{version number}}"
+   2. [ ] Show user the current version number
+   3. [ ] Prompt the user for new version number
+   4. [ ] Validate that new version number does not exist in the store
+   5. [ ] Name new blob "credentials-v{{user-defined version number}}
+3. [ ] Update the CredentialBlobVersion setting ni the OptiCredentialAdmin cloud service config file with the {{user-defined version number}}
+4. [ ] Send Message to the OptiCredentialAdmin via the credentialrequest queue that new credentials are available
+*** USE NEW ENCRYPTION KEY
+1. [ ] Generate new symmetric key
+2. [ ] Update OptiRTC.CredentialManagement.AdminHost/app.config file with this new key value
+3. [ ] Encrypt updated credential stoer using the new symmetric key
+4. [ ] upload store as described in "use existing encryption key" step 2 -- use existing encryption key ?
+5. [ ] indicate to user that the credential admin service must be redeployed before updated credentials message is sent out
+
+* focus:
+correctly implement service bus distinct feature
+then refactor
+
+
+* TODO
+** DONE Fix UpdateCloudServiceConfiguration
+   CLOSED: [2015-03-13 Fri 10:03]
+   - CLOSING NOTE [2015-03-13 Fri 10:03]
+Multiple settings makes it into an array - figure out how to best access the name/value we want
+** DONE Read through all code again, with standards in mind
+   CLOSED: [2015-03-13 Fri 10:04]
+   - CLOSING NOTE [2015-03-13 Fri 10:04]
+** DONE Really give the service utilities class another pass through (too big?)
+   CLOSED: [2015-03-13 Fri 10:04]
+   - CLOSING NOTE [2015-03-13 Fri 10:04]
+** TODO Refactor KeyRotator
+- [X] Change to Interface
+- [X] Remove UploadStoreToCloud, UpdateCloudConfiguration, SendNewCredentialNotification
+  - Move to new class ?
+- [ ] Change RegenerateKeys from void to bool, do some verification at the start of method, return false if any fails?
+- [X] Add comments to each property/method
+
+** TODO Finish TODAY
+- [X] Pass through with Standards
+  - [X] AzureAccount Info
+  - [X] AzureBlobStorage
+  - [X] AzureCredentials
+  - [X] InputBox
+  - [X] KeyRotationForm
+  - [X] KeyRotator
+  - [X] Program
+  - [X] ServiceBusInfo
+  - [X] StorageAccountInfo
+  - [X] StorageBusRotator
+  - [X] StorageServiceUtilities
+  - [X] TableStorageRotator
+  - [X] VersionComparer
+- [X] Fix Magic stuff
+  - [X] Figure out what magic values are (i.e. a service bus connection namespace)
+  - [X] Create local encrypted cred store w/ info (currently information on Ironkey "store.json")
+  - [X] Remove "magic" values (fetch via "opti environment")
+- [-] Remove as many "Magic Strings" as possible
+  - [X] AzureAccount Info
+  - [ ] AzureBlobStorage
+  - [ ] AzureCredentials
+  - [X] InputBox
+  - [X] KeyRotationForm
+  - [X] KeyRotator
+  - [X] Program
+  - [X] ServiceBusInfo
+  - [X] StorageAccountInfo
+  - [X] StorageBusRotator
+  - [ ] StorageServiceUtilities
+  - [X] TableStorageRotator
+  - [X] VersionComparer
+- [X] Fix StorageServiceUtilities.UpdateCloudServiceConfiguration
+  - "newConfig" should probably work with an object, not just a string
+- [X] Fix "TODO"s from review
+- [X] Refactoring
+  - [X] Change Type radio buttons to list box
+  - [X] Make ENUM of Types to pass to factory?
+- [X] Go through specifications again
+- [ ] Refactor Tests (see standards)
+- [ ] Work more on separating UI/Code?
+- [ ] Utility class becoming too big - rework ?
+- [ ] For each file, "removed unused using, sort using" and format document (C-k, C-d)
+

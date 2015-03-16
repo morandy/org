@@ -1,1 +1,94 @@
-Hello Org!
+Key Rotation Project
+
+* TODO Refactoring [0%]
+** TODO StorageServiceUtilities [50%]
+- [X] unified credential access
+- [X] simplify methods, extract common HTTP code
+- [ ] change "magic" values to consts/config settings
+- [ ] clean up code (very, very messy)
+** TODO KeyRotationForm [0%]
+- [ ] btnCheckKeys_Click()
+  - [ ] Abstract the loop more / StorageAccountInfo (?)
+- [ ] generateNeyKeys()
+  - [ ] Abstract this functionality to class
+** TODO Unit Tests [0%]
+- [ ] More tests!
+- [ ] Clean up, add "harnessy"/setup methods
+* TODO Get CryptoTools Working
+* TODO Research updating Service Bus SAS
+* flow
+
+- Get list of <service-name>s
+- foreach(service-name)
+  - Get Storage Account Keys for service-name
+  - Get all things using service-name
+  - Determine which key we are using (Key A)
+  - Broadcast other key as new key (Key B)
+  - Update JSON
+  - Regenerate (Key A) for service-name
+    
+* methods
+- Make request
+- handle response
+
+* access needed
+Certificate
+subscription-id
+* Key Rotation - Table Storage
+** Load JSON File
+Load, verify (?)
+
+** 1. Provide the user with a list of all accounts in the ProjectStorage scope.
+
+
+#+BEGIN_SRC cs
+CredentialStore store = new CredentialStore(File.ReadAllText(dialog.FileName));
+items = new List<CredentialStoreItem>(store.Items.ToList().Where(i=>i.Scopes[0]=="ProjectStorage"));
+List<ProjectStorageInfo> psi = GetProjectStorageInfoList(items);
+#+END_SRC
+
+** 2. If possible, indicate if the current key is the primary or secondary key for the storage account.
+// sample: DefaultEndpointsProtocol=https;AccountName=30l7vaswsa1opakdsa;AccountKey=qmq6NvBaw+DTtwdHqgkHc2zl8HUqHaxURyax2Q8odynFP1RsISpRl9AwzNyHhzjif45VPKct0aTFqPosNhSqaQ==
+// sample: DefaultEndpointsProtocol=https;AccountName=amdjkqeew1909dfa0;AccountKey=qzuot0xHdq0DcRTCz/t2vD0SqPLhoQeMfzDq14+vyZDED3yBA/SlAwUkhWxaijtrJ0O/a8u0tNdMZyxbKkpmHw==
+// split on ';'
+
+foreach(ProjectStorageInfo projectStorageInfo in psi)
+{
+  StorageKeys keys = GetStorageAccountKeys( args );
+}
+
+
+*** Sample UI
+Project Storage
+| Protocol | AccountName        | Key Type  | AccountKey                                                                               |
+| https    | 30l7vaswsa1opakdsa | Primary   | qmq6NvBaw+DTtwdHqgkHc2zl8HUqHaxURyax2Q8odynFP1RsISpRl9AwzNyHhzjif45VPKct0aTFqPosNhSqaQ== |
+| https    | amdjkqeew1909dfa0  | Secondary | qzuot0xHdq0DcRTCz/t2vD0SqPLhoQeMfzDq14+vyZDED3yBA/SlAwUkhWxaijtrJ0O/a8u0tNdMZyxbKkpmHw== |
+|          |                    |           |                                                                                          |
+
+** 3. Allow user to select any or all of the accounts and indicate if they want to generate new primary or secondary keys
+** 4. Store newly generated keys in a copy of the original credential store used to populate the list
+* Tests!
+Make sure to write tests and test things.
+* Questions
+rename Program.cs ?
+
+CredentialStoreItem
+* Test Azure Info
+subscriptionID: 8623d538-e323-4ea7-872b-2589d5e4a3ce
+
+storage: optiteststorage
+
+path to app.config with encryption key:
+C:\src\OptiRTCAzure\OptiRTC.CredentialManagement.AdminHost\app.config
+
+CryptoTools.SymmetricEncrypt(string plainTextToEncrypt, byte[] cryptKey)
+^ cryptKey is just the Convert.ToBase64(keyvalue)
+
+configuration/
+ appSettings
+  add key="symmetricKey" value="keyvaluethatweneed"
+
+* Update Workflow
+
+[[https://docs.google.com/a/optirtc.com/document/d/1FX1xqKNKd9b83J4LVygOwlsll8XKibaNDpodn_RNhcY/edit][Credential Management Specs]]
+[[https://www.websequencediagrams.com/][Diagraming Tool]]
