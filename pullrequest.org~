@@ -25,3 +25,17 @@
 2. Put in a pull request for ${branchName}
 - In the pull request message, be detailed
 - Include any Gemini Information, if applicable
+* How to make new branch
+
+# checkout master, pull so it is up to date
+$ git checkout master
+$ git pull origin master
+
+# checkout a new branch with ${branchname}
+$ git checkout -b ${branchname}
+
+# do work
+
+# first push only
+$ git push -u origin ${branchname}
+

@@ -11,3 +11,196 @@ Specs to come
 Use Credential Store UtilityApp as possible
 Get familiar with credential store
 Use those credentials as a basis for what needs to be done to recover
+
+* Possible Program Flow
+
+** Create New Service Bus Namespaces (and queues)
+
+*** Create Namespace
+**** Type Defs
+class NamespaceDescription
+{
+  // construct from response string
+  string name;
+  string connectionString;
+  // etc
+} 
+
+{
+  namespace[] namespaces;
+}
+
+namespace
+{
+  string   name
+  string[] queues
+}
+
+**** Pseudo Code
+void CreateServiceBusNamespace(
+    string subscriptionID,
+    Certificate certificate,
+    string namespaceName,
+    string region)
+{
+  // do stuff to create name space
+  // verify it's ok
+  // return
+}
+
+void CreateServiceBusNamespaceAndQueues()
+{
+
+  List<Namespace> namespaces = GetNamespaces();
+
+  foreach(var namespace in namespaces)
+  {
+
+    NamespaceDescription namespaceDescription = 
+        CreateServiceBusNamespace(subscriptionID, certificate, namespace.name, region);
+
+    if(namespaceDescription == null)
+    {
+      // error, log, skip
+      continue;
+    }
+
+    string connectionString = namespaceDescription.connectionString;
+
+    var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
+
+    foreach(string queue in queues)
+    {
+      if(!namespaceManager.QueueExists(queue)
+      {
+        namespaceManager.CreateQueue(queue);
+      }
+    }
+  }
+}
+
+**** Queue Settings
+Are there any queue settings?
+i.e. MaxSize, Default Message Time to Live
+**** web request sample
+Using HttpWebRequest
+
+request: 
+ Method: PUT
+ URI: https://management.core.windows.net/{subscription ID}/services/ServiceBus/Namespaces/{namespace name}
+ Headers:
+  Content-Type application/atom+xml
+  x-ms-version 2012-03-01
+  *also requires a client certificate matching that uploaded for the subscription
+ Body:
+  The namespace description (only region is required)
+
+response:
+ codes:
+  200 created
+  401 authorization failure
+  500 internal error
+ headers:
+  content-type
+ body:
+  namespace description
+
+  
+** Restore SQL backup
+
+~~ code here
+
+** Create Redis Cache Service
+
+~~ code here
+May need to use Powershell
+[[https://msdn.microsoft.com/library/azure/dn689001.aspx][MSDN Azure Cache Cmdlets]]
+
+** Hydrate cache using local utility
+
+~~ code here
+
+** Create New Credential Store with correct connection strings
+a. SQL Server (from sql?)
+b. Replicated Storage
+c. New service-bus namespces and queue names (if necessary) -- see above for that info
+d. new cache address + key (from redis?)
+
+** Redeploy cloud services and websites (including certificates)
+~~~
+** Repoint DNS entries
+~~~
+** ACS ?
+
+* Reading credential json
+
+Key/Value/Scope
+
+CredentialStore store
+List<CredentialStoreItems> items = store.Items.ToList();
+
+foreach (var item in items)
+{
+  if (item.Value.StartsWith("Endpoint=sb")
+  {
+    // conn string for queue
+    // split on . Namespace|QueueName|ConnectionString
+
+  }
+}
+* API Reference
+[[https://msdn.microsoft.com/en-us/library/azure/ee460795.aspx][Regenerate Storage Account Keys]]
+
+[[https://msdn.microsoft.com/en-us/library/azure/jj856303.aspx][Create Namespace]]
+[[https://social.msdn.microsoft.com/Forums/en-US/8f5940ea-db15-4731-930c-eb1cd693f323/is-there-a-programmaticapi-way-to-provision-a-service-bus-namespace-?forum=windowsazuremanagement][Create Namespace with Rest Sample]]
+
+[[http://azure.microsoft.com/en-us/documentation/articles/service-bus-dotnet-how-to-use-queues/][Service Bus Queues example]]
+
+
+* key rotation
+
+Make sure there isn't a mix of primary/secondary keys within services?!
+
+- identify all things using Key Primary
+- switch all to use Key Secondary
+- assert that all things use new key
+- Generate new Key Primary
+
+- identify all things using Key Secondary
+- switch all to use Key Primary (new)
+- assert that all things use new key
+- Generate new Key Secondary
+
+-- repeat
+
+#+NAME: Sample
+#+BEGIN_SRC c
+// Method
+// - POST
+// URI Parameters
+// - action=regenerate
+// Headers
+// - Content-Type : "application/xml"
+// - x-ms-version : "2009-10-01"
+
+string requestUrl = String.Format(
+  "https://management.core.windows.net/{0}/services/storageservices/{1}/keys?action=regenerate",
+  subscriptionID,
+  serviceName);
+
+// request body (xml)
+// Specify which key to regenerate (Primary or Secondary)
+<?xml version="1.0" encoding="utf-8"?>
+<RegenerateKeys xmlns="http://schemas.microsoft.com/windowsazure">
+  <KeyType>Primary|Secondary</KeyType>
+</RegenerateKeys>
+
+// Response
+// Status 200 (OK)
+
+#+END_SRC
+* PS
+- create instance
+- connect to Azure
+~~ do stuff ~~
+~~ get info ~~

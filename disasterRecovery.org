@@ -204,3 +204,24 @@ string requestUrl = String.Format(
 - connect to Azure
 ~~ do stuff ~~
 ~~ get info ~~
+* Geo Redundant Process
+- cck if failover has ocurred:
+  - https://msdn.microsoft.com/en-us/library/ee460802.aspx Get storage account properties
+
+https://management.core.windows.net/<subscription-id>/services/storageservices/<storage-account-name>
+
+<GeoPrimaryRegion>primary-region</GeoPrimaryRegion>
+<StatusOfPrimary>[Available|Unavailable]</StatusOfPrimary>
+<LastGeoFailoverTime>DateTime</LastGeoFailoverTime
+<GeoSecondaryRegion>secondary-region</GeoSecondaryRegion
+<StatusOfSecondary>[Available|Unavailable]</StatusOfSecondary>
+
+time to get cracking!
+
+* Disaster Recovery
+- Get data center info from Azure
+- Re-deploy Service Bus namespaces to this location
+  - Do this for each namespace
+  - Queues can be defined fcom the XXXQueueName nettings in the credential store
+- Restore OptiRTC sql database from recent backup.
+- Create redis cache access? (Can we do this from REST?)
