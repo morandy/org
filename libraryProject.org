@@ -1,0 +1,6 @@
+:DESCRIPTION: For notes on the group library project made during dev training
+
+* Library Project
+
+** Test Plan
+See [[~/Documents/org/lp_testPlan.org][Test Plan]]

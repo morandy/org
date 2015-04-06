@@ -1,0 +1,5 @@
+* Test Plan
+"spiral of tests"
+
+- include unit tests for each "box"
+- test for each box->box, spiraling up

@@ -1,0 +1,26 @@
+* Test Plan Outline
+
+** rules
+First to checkout wins
+
+** general test questions
+- Should we test around volatilities?
+** specific questions for tests
+- Can a non-member ever place a hold?
+- 
+
+** General Outline
+- Title Page
+  - Revision History: Found in most (all?) of our documentation
+  - Table of Contents
+- Objectives
+  - Purpose: What does this document outline?
+  - Scope: What functionality are we looking to test?
+  - References: What documents contain related information? (i.e. specification docs)
+- Features to be Tested: What will be tested?
+- Approach: How the features will be tested?
+- Tasks: All test related tasks, from Test Plan to the end (Test results, reports?)
+- Responsibilities: Who will be responsible for what task(s)?
+- Schedule: When are tasks due? (related "Project" plan?)
+- Approval: Is this plan approved? By whom?
+

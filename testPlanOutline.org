@@ -1,0 +1,29 @@
+* Test Plan Outline
+
+** rules
+First to checkout wins
+
+** general test questions
+- Should we test around volatilities?
+** specific questions for tests
+- Can a non-member ever place a hold?
+- User has many books to checkout, one is unavailable, proceeds?
+- Can a hold be placed on a book that is available?
+- Placing hold on book currently unavailable, becomes available during process
+- Will there be a "Create Account" workflow?
+
+** General Outline
+- Title Page
+  - Revision History: Found in most (all?) of our documentation
+  - Table of Contents
+- Objectives
+  - Purpose: What does this document outline?
+  - Scope: What functionality are we looking to test?
+  - References: What documents contain related information? (i.e. specification docs)
+- Features to be Tested: What will be tested?
+- Approach: How the features will be tested? (not too specific,
+  details to be written in test design documentation)
+
+** Specific Test ideas
+- User goes to check out a book which becomes unavailable
+- Many books, one becomes unavailable

@@ -370,3 +370,21 @@ Multiple settings makes it into an array - figure out how to best access the nam
 - Possible Solution:
   ctor: KeyRotator(KeyRotatorType type, CredentialStore store, string storeFileName, IRestUtility utility)
   - This would allow for "fake" stores / mocked utilities?
+
+* today:
+** change key rotator
+- [ ] ctor() take CredentialStore and IRestUtility as param
+- [ ] change regenerate to return CredentialStore (or null) instead of bool
+** form
+- Add credential store member
+** update pull request
+
+* Test Changes
+** Notes from Amanda
+- Helper class that has static method for the mock utility
+- make tests more readable
+** Look at test coverage
+
+* change CredentialStoreBlobManagement
+- "Smelly" interaction with AdminHostConfigHelper
+- Put all uses of CryptoTools into AdminHostConfigHelper

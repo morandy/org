@@ -229,34 +229,41 @@ Multiple settings makes it into an array - figure out how to best access the nam
 
 * final pass through for standards
 
+
 * Pull Request
 ** Comments from Pull request
-- General, Standards:
-  - Method names (ALL) should be Pascal Case
-  - Remove Regions
-- README.txt  
-  - [ ] Remove layout section
-- KeyRotationForm.cs
-  - Save original credential store?
-    - Possibly restore on the "Quit anyway" / delete when cred store is uploaded to blob
 - InputBox.cs
   - Validating: use regex to match *or* input only numeric version and create string in code
   - Also: Use VersionComparer to detect if new version is infact newer than the old one?
-- AzureRestUtility.cs
-  - updateServiceConfiguration() -- Should we throw an exception here or maybe just log it and return false or something?
-  - look for Pascals
+- README.txt  
+  - [ ] Remove layout section
 - Need Better Names:
   - AppConfigAccess.cs
     - Name too general
   - AzureBlobStorage.cs
-    - "Again, too general a name. What are we doing in this class? These are all functions related to managing the credential store blob, right?"
+    - "Again, too general a name. What are we doing in this class?
+      These are all functions related to managing the credential store
+      blob, right?"
+- General, Standards:
+  - Method names (ALL) should be Pascal Case
+  - Remove Regions
+- KeyRotationForm.cs
+  - Save original credential store?
+    - Possibly restore on the "Quit anyway" / delete when cred store is uploaded to blob
+- AzureRestUtility.cs
+  - updateServiceConfiguration() -- Should we throw an exception here
+    or maybe just log it and return false or something?
+  - look for Pascals
 - Tests
   - A few things on these tests: first of all, they are integration tests that require outside resources to be in a given state rather than standalone unit tests. This is not necessarily bad, but to enable them to run for anyone and forever, we'd have to have a script to set up the azure resources in the right account including management certificate and have that information be available to the tests when they run on appveyor. For now, we should just disable them. Though ... now that I write that, how did these pass on appveyor when you put in this pull request? Is appveyor not discovering them?
   - Second, you pretty much never have to use the word "Test" in the name of a test. It's implied.
   - Third, and this goes for all other parts of this code, avoid using #region. First, I just personally dislike it. Second, it hides code, which is generally a bad idea. Third, you don't need it. There are other ways to group functionality and see more of your code. For tests, you can add additional nested test fixtures to group related tests together.
 - IKeyRotator:
   - TableStorageRotator.cs
-    - "I'm not convinced you need two of these rotators. They're the same except the selection of the credential items to include, right? Perhaps just create one with a constructor that takes the appropriate credential items."
+    - "I'm not convinced you need two of these rotators. They're the
+      same except the selection of the credential items to include,
+      right? Perhaps just create one with a constructor that takes the
+      appropriate credential items."
       - [ ] Fix, or prove that they are different?
   - StorageBusRotator.cs
     - IAzureAccountInfo (list) -- consider removing, or clarify its purpose
@@ -271,27 +278,95 @@ Multiple settings makes it into an array - figure out how to best access the nam
     - Possibly rename? Is it "info"?
   - ServiceBusInfo
     - SetFromCredentialStoreItemValue()
-      - This function and the one above it are required to be run before the function below, yes? Word to the wise: never trust other developers to use your code the way you intend it to be used; instead, write it so it can't be misused. What if I created this object then just called GenerateNewKey? NullReferenceException on line 46 or 50, below. So:
+      - This function and the one above it are required to be run
+        before the function below, yes? Word to the wise: never trust
+        other developers to use your code the way you intend it to be
+        used; instead, write it so it can't be misused. What if I
+        created this object then just called GenerateNewKey?
+        NullReferenceException on line 46 or 50, below. So:
 	- You should create a constructor that takes a CredentialStoreItem
-	- In that constructor, you should use the .Value of that item as an input into what are now lines 21-23
+	- In that constructor, you should use the .Value of that item
+          as an input into what are now lines 21-23
 	- After those lines, you should run lines 29-32.
-      - This way, just by instantiating the object, you'll have it set up with all the information you'll need to run the GenerateNewKey method.
+      - This way, just by instantiating the object, you'll have it set
+        up with all the information you'll need to run the
+        GenerateNewKey method.
     - SetActiveKeyType()
       - You also create a utility here and in the GenerateNewKey. Two points about this
-	- using AzureRestUtility directly in this class makes it impossible to unit test (as it requires Azure items to exist)
-	- You should just create it once and use it throughout the class
-	- You probably shouldn't even create it but pass in an instance in the constructor via an interface. If you have a factory method for this (I can't recall), you could have that factory new up a utility and pass it in
+	- using AzureRestUtility directly in this class makes it
+          impossible to unit test (as it requires Azure items to
+          exist)
+	- You should just create it once and use it throughout the
+          class
+	- You probably shouldn't even create it but pass in an
+          instance in the constructor via an interface. If you have a
+          factory method for this (I can't recall), you could have
+          that factory new up a utility and pass it in
 	  - IRestUtility utility = new AzureRestUtility
 	  - IAzureAccountInfo info = new ServiceBusInfo(credentialItem, utility)
-	- Something like that. Then you can write a unit test to make sure it's setting the primary or secondary key correctly by mocking the result of calls on that utility via Moq. We can talk about this in more depth if you want/need.
-
+	- Something like that. Then you can write a unit test to make
+          sure it's setting the primary or secondary key correctly by
+          mocking the result of calls on that utility via Moq. We can
+          talk about this in more depth if you want/need.
+	  
 ** Changes Made
 *** DONE ReadMe
     CLOSED: [2015-03-18 Wed 09:50]
     - CLOSING NOTE [2015-03-18 Wed 09:50]
 - [X] Remove Layout section
-*** KeyRotation.Tests
+*** DONE AzureBlobStorage (approved)
+- Renamed: CredentialStoreBlobManagement
+*** DONE AppConfigAccess (approved)
+- Renamed to AdminHostAppConfig
+*** TODO KeyRotation.Tests
 - [X] Remove Regions
-*** AzureRestUtility
+*** TODO AzureRestUtility
 - [X] Remove Regions
 - [X] Fix method casing
+- UpdateCloudConfiguration
+  - Changed to return bool, result of PostNewServiceConfiguration
+- PostNewServiceConfiguration
+  - Now returns bool, if false, it logs to console any issues it had
+*** DONE InputBox
+- [X] Use regex to validate
+- [X] Use version comparer to ensure it is a newer version
+- Removing dependancy from AzureBlobStorage
+  - Passing in "latestVersion" to constructor
+  - Assuming that the new version number, if greater than the "latest" returned, the new one will not exist anymore
+
+*** AccountInfo
+- Making an Abstract Base Class
+*** StorageAccountInfo
+*** TODO Think of new name for AzureAccount classes
+
+** Comments from Update
+*** Unit Tests
+- [X] Make separate "VersionComparer" test file
+- [X] Merge fake StorageServices into the mock method
+- [X] Remove "with mocks" from test names, since only testing with mocks
+*** Rename AdminHostAppConfig
+- [X] to AdminHostConfigHelper
+*** RestUtility
+- [X] Combine Post and Get Service (YAGNI)
+*** KeyRotator
+- [ ] remove comment about service bus (doesn't apply)
+- [ ] Merge constructor w/ load
+
+
+* questions
+- Change from Interface to class?
+- Go over Dependancy Injection?
+  - Do I make only 1 and reuse it, or do I make one for each?
+  - 
+- VS generated methods excluded from this?
+
+* AppVeyor not finding tests?
+- Added an environment to the build in order to pick up my solution
+- problem with Redlock?
+- Latest version put on git
+
+* How to make KeyRotator testable?
+- Currently building the object requires *real* credential store file and builds a specific instance of IRestUtility which is used to create key generators
+- Possible Solution:
+  ctor: KeyRotator(KeyRotatorType type, CredentialStore store, string storeFileName, IRestUtility utility)
+  - This would allow for "fake" stores / mocked utilities?

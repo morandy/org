@@ -1,0 +1,38 @@
+* Dev Training
+** Day 1
+- Meta Data vs Data:
+  - Time Series Data
+    Many types of this data
+  - Metadata
+    "Data that describes our data."
+    - Resource: 
+      - Pointer to the device/description with detailed information
+      - eInterface: What we are measuring (the characteristic of the environment)
+      - Unit:
+	- used for grouping
+	- needed for conversions
+	- visualization ques
+      - Datum: known value that can be used as a reference point (i.e. sea level)
+      - Versioning:
+	- Datastreams:
+	  - One point in time, strict rules
+	  - Contains 1+ resources linked in time
+- Processes:
+  - Controllers:
+    "Read and injest raw data"
+    - Gets the data from whichever source and says what to do with it
+  - Systems:
+    "Creates derived data from combination of raw data
+    inputs, human specified data and other deried data. Post-Action
+    sequences. Have metadata associated with them"
+    - Post-Action Sequence:
+      "Sequence of Post-Actions"
+      - Post-Action:
+	"A small unit of work" - i.e. Is leftValue > rightValue?
+      - 
+
+
+
+
+
+

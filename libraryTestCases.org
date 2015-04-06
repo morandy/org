@@ -1,0 +1,170 @@
+* Test Cases
+** General Layout
+- Case Name
+- Components?
+  What different working parts we are using in order to perform this test?
+- Pre-conditions / assumptions
+  These are things we assume to be true / need to start test
+  This can be a WF breakpoint (i.e. everything is ok up to #. of a WF, then something happens)
+- Actions
+  Sequence of events leading up to a decision point
+- Expected results / aftereffect
+  different outcomes based upon the return of the decision point
+
+Abbreviations:
+- U? : unauthenticated user
+- U+ : authenticated user
+- # : number
+- ! : not
+
+Tests ordered from earliest -> latest point of failure/exit
+
+** Questions:
+- Can a user p/h if too many items checked out?
+- Is there a hold limit, or could you p/h on the whole catalog?
+
+** Notes
+- Organize
+- mark all tests [TestCategory("Integration")] -- or something like that
+#+BEGIN_SRC cs
+
+[TestFixture]
+[Category("Integration")]
+public class AssetTests { ... }
+
+#+END_SRC
+
+** Test Categories
+*** Check Out
+**** ANONYMOUS USER RELATED
+***** Anonymous user cannot check out book
+This may be covered by a unit test?
+- components:
+  - Asset Manager
+  - Membership Access
+- assumptions:
+  - U?
+- actions:
+  - U? Requests 1+ books by ISBN #
+  - U? !authenticated
+- aftereffect:
+  - exit routine
+
+**** HOLD / AVAILABILITY RELATED
+***** User placing hold on available book
+**** Actual Checkout 
+***** Ideal Book Checkout Process
+everything as planned, just a normal checkout
+- components:
+  - Asset Manager
+  - Membership Access
+  - Catalog Access
+  - Lending Engine
+- assumptions:
+  - U+
+  - Book "available"
+- actions:
+  - U? requests book by ISBN
+  - U? -> U+
+  - book is avaiable
+- aftereffect:
+  - due dates assigned to book
+  - book removed from available
+  - user gets book (?)
+
+***** Available book checked out by another user
+Should there be a "... and places hold / ... and doesn't place hold" ?
+- components:
+  - Asset Manager
+  - Membership Access
+  - Catalog Access
+- assumptions:
+  - U+
+  - Book "available" according to search
+  - Book becomes "unavailable" during checkout
+- actions:
+  - U? Requests book by ISBN #
+  - U? -> U+
+  - Catalog access returns book no longer available
+- aftereffect:
+  - U+ taken to hold process
+***** User tries to check out too many paper/audio books
+This might be a unit test?
+User request many (10?) assets by ISBN
+***** User checks out 5 books, then tries to check out more
+This might be a unit test?
+Normal checkout process ("Ideal Book Checkout Process") run with 5 books, run again after with 5 more
+***** User tries to check out a reference book
+This might be a unit test?
+***** User tries to check out many books, including a reference book
+This might be a unit test?
+**** FINE RELATED
+***** User attempts to check out with fine and pays
+- components:
+  - Asset Manager
+  - Memberhsip Access: User would be returned with fine, what handles fine payment? 
+  - Catalog Accesss
+  - Lending Engine
+- assumptions
+  - U+
+  - Book available
+  - Paper Book
+- actions:
+  - U? requests 1+ books by ISBN+
+  - U? -> U+
+  - U+ has Fine
+  - U+ pays Fine (exactly)
+- aftereffect:
+  - book checked out (4,5,6) of "Books Available"
+
+*** Manage Membership
+**** Anonymous user cannot manage membership (?)
+Can a non member even access this, or would it be hidden via UI
+**** Users new email address is valid
+This might be a unit test?
+
+**** Fine payment
+Test(s) for integration of payment w/ manager, might be more UI related / manual testing ?
+**** Cancel hold notification on multiple holds
+- Tom has Book A checked out, Dick and Harry both have Book A on hold.
+- Dick put it on hold first, Harry second.
+- Tom returns Book A
+- Dick is notified (Harry is not?).
+Additionally...
+- afterwards:
+  - Dick cancels the hold
+  - Harry is notified
+
+*** Pay Fine
+- What if user tries to pay with non-US currency?
+- different paths: no payment, partial payment, exact payment, over-pay & change, over-pay & donate
+  - how do these affect the process -> fine -> process ?
+
+*** Return Book
+**** FINES
+***** Only overdue items incur fine
+Different combinations of returns, make sure only fine is incurred for overdue items
+***** Fine accumulation (has fine, returns book with fine)
+***** Fine payment?
+- return a book that isn't checked out?
+- return a reference book?
+**** NOTIFICATION
+***** Returned, overdue book with hold causes notification
+Making sure expected continuation of workflow happens
+***** Notifify if book on hold
+***** Multiple Users have hold, who is notified?
+See "Manage Membership / Cancel hold notification on multiple holds"
+**** Books returned are available
+This might be a unit test?
+*** Search Catalog
+**** Search available to any user
+
+**** Search results (mixed search types)
+This might be a unit test?
+This might be a good use of NUnit's [TestCase(params)]
+Different combinations of search for same book return book
+**** Garbage in - Garbage out searches
+Different searches with bad data, what happens?
+Do we include "Did you mean...?"
+**** Search count / sorting ?
+This might be a unit test?

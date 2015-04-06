@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>libraryTestCases</title>
+<!-- 2015-04-02 Thu 09:45 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">libraryTestCases</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Test Cases</a>
+<ul>
+<li><a href="#sec-1-1">1.1. General Layout</a></li>
+<li><a href="#sec-1-2">1.2. Questions:</a></li>
+<li><a href="#sec-1-3">1.3. Notes</a></li>
+<li><a href="#sec-1-4">1.4. Test Categories</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. Check Out</a></li>
+<li><a href="#sec-1-4-2">1.4.2. Manage Membership</a></li>
+<li><a href="#sec-1-4-3">1.4.3. Pay Fine</a></li>
+<li><a href="#sec-1-4-4">1.4.4. Return Book</a></li>
+<li><a href="#sec-1-4-5">1.4.5. Search Catalog</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Test Cases</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> General Layout</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Case Name
+</li>
+<li>Components?
+What different working parts we are using in order to perform this test?
+</li>
+<li>Pre-conditions / assumptions
+These are things we assume to be true / need to start test
+This can be a WF breakpoint (i.e. everything is ok up to #. of a WF, then something happens)
+</li>
+<li>Actions
+Sequence of events leading up to a decision point
+</li>
+<li>Expected results / aftereffect
+different outcomes based upon the return of the decision point
+</li>
+</ul>
+
+<p>
+Abbreviations:
+</p>
+<ul class="org-ul">
+<li>U? : unauthenticated user
+</li>
+<li>U+ : authenticated user
+</li>
+<li># : number
+</li>
+<li>! : not
+</li>
+</ul>
+
+<p>
+Tests ordered from earliest -&gt; latest point of failure/exit
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Questions:</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Can a user p/h if too many items checked out?
+</li>
+<li>Is there a hold limit, or could you p/h on the whole catalog?
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Notes</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>Organize
+</li>
+<li>mark all tests [TestCategory("Integration")] &#x2013; or something like that
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-cs">[TestFixture]
+[Category("Integration")]
+public class AssetTests { ... }
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Test Categories</h3>
+<div class="outline-text-3" id="text-1-4">
+</div><div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Check Out</h4>
+<div class="outline-text-4" id="text-1-4-1">
+</div><ol class="org-ol"><li><a id="sec-1-4-1-1" name="sec-1-4-1-1"></a>ANONYMOUS USER RELATED<br  /><ol class="org-ol"><li><a id="sec-1-4-1-1-1" name="sec-1-4-1-1-1"></a>Anonymous user cannot check out book<br  /><div class="outline-text-6" id="text-1-4-1-1-1">
+<p>
+This may be covered by a unit test?
+</p>
+<ul class="org-ul">
+<li>components:
+<ul class="org-ul">
+<li>Asset Manager
+</li>
+<li>Membership Access
+</li>
+</ul>
+</li>
+<li>assumptions:
+<ul class="org-ul">
+<li>U?
+</li>
+</ul>
+</li>
+<li>actions:
+<ul class="org-ul">
+<li>U? Requests 1+ books by ISBN #
+</li>
+<li>U? !authenticated
+</li>
+</ul>
+</li>
+<li>aftereffect:
+<ul class="org-ul">
+<li>exit routine
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</li></ol>
+</li>
+<li><a id="sec-1-4-1-2" name="sec-1-4-1-2"></a>FINE RELATED<br  /><ol class="org-ol"><li><a id="sec-1-4-1-2-1" name="sec-1-4-1-2-1"></a>User attempts to check out with fine and pays<br  /><div class="outline-text-6" id="text-1-4-1-2-1">
+<ul class="org-ul">
+<li>components:
+<ul class="org-ul">
+<li>Asset Manager
+</li>
+<li>Memberhsip Access: User would be returned with fine, what handles fine payment? 
+</li>
+<li>Catalog Accesss
+</li>
+<li>Lending Engine
+</li>
+</ul>
+</li>
+<li>assumptions
+<ul class="org-ul">
+<li>U+
+</li>
+<li>Book available
+</li>
+<li>Paper Book
+</li>
+</ul>
+</li>
+<li>actions:
+<ul class="org-ul">
+<li>U? requests 1+ books by ISBN+
+</li>
+<li>U? -&gt; U+
+</li>
+<li>U+ has Fine
+</li>
+<li>U+ pays Fine (exactly)
+</li>
+</ul>
+</li>
+<li>aftereffect:
+<ul class="org-ul">
+<li>book checked out (4,5,6) of "Books Available"
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</li></ol>
+</li>
+
+<li><a id="sec-1-4-1-3" name="sec-1-4-1-3"></a>HOLD / AVAILABILITY RELATED<br  /><ol class="org-ol"><li><a id="sec-1-4-1-3-1" name="sec-1-4-1-3-1"></a>User placing hold on available book<br  /></li></ol>
+</li>
+<li><a id="sec-1-4-1-4" name="sec-1-4-1-4"></a>Actual Checkout (lending engine related)<br  /><ol class="org-ol"><li><a id="sec-1-4-1-4-1" name="sec-1-4-1-4-1"></a>Ideal Book Checkout Process<br  /><div class="outline-text-6" id="text-1-4-1-4-1">
+<p>
+everything as planned, just a normal checkout
+</p>
+<ul class="org-ul">
+<li>components:
+<ul class="org-ul">
+<li>Asset Manager
+</li>
+<li>Membership Access
+</li>
+<li>Catalog Access
+</li>
+<li>Lending Engine
+</li>
+</ul>
+</li>
+<li>assumptions:
+<ul class="org-ul">
+<li>U+
+</li>
+<li>Book "available"
+</li>
+</ul>
+</li>
+<li>actions:
+<ul class="org-ul">
+<li>U? requests book by ISBN
+</li>
+<li>U? -&gt; U+
+</li>
+<li>book is avaiable
+</li>
+</ul>
+</li>
+<li>aftereffect:
+<ul class="org-ul">
+<li>due dates assigned to book
+</li>
+<li>book removed from available
+</li>
+<li>user gets book (?)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</li>
+
+<li><a id="sec-1-4-1-4-2" name="sec-1-4-1-4-2"></a>Available book checked out by another user<br  /><div class="outline-text-6" id="text-1-4-1-4-2">
+<p>
+Should there be a "&#x2026; and places hold / &#x2026; and doesn't place hold" ?
+</p>
+<ul class="org-ul">
+<li>components:
+<ul class="org-ul">
+<li>Asset Manager
+</li>
+<li>Membership Access
+</li>
+<li>Catalog Access
+</li>
+</ul>
+</li>
+<li>assumptions:
+<ul class="org-ul">
+<li>U+
+</li>
+<li>Book "available" according to search
+</li>
+<li>Book becomes "unavailable" during checkout
+</li>
+</ul>
+</li>
+<li>actions:
+<ul class="org-ul">
+<li>U? Requests book by ISBN #
+</li>
+<li>U? -&gt; U+
+</li>
+<li>Catalog access returns book no longer available
+</li>
+</ul>
+</li>
+<li>aftereffect:
+<ul class="org-ul">
+<li>U+ taken to hold process
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</li>
+<li><a id="sec-1-4-1-4-3" name="sec-1-4-1-4-3"></a>User tries to check out too many paper/audio books<br  /><div class="outline-text-6" id="text-1-4-1-4-3">
+<p>
+This might be a unit test?
+User request many (10?) assets by ISBN
+</p>
+</div>
+</li>
+<li><a id="sec-1-4-1-4-4" name="sec-1-4-1-4-4"></a>User checks out 5 books, then tries to check out more<br  /><div class="outline-text-6" id="text-1-4-1-4-4">
+<p>
+This might be a unit test?
+Normal checkout process ("Ideal Book Checkout Process") run with 5 books, run again after with 5 more
+</p>
+</div>
+</li>
+<li><a id="sec-1-4-1-4-5" name="sec-1-4-1-4-5"></a>User tries to check out a reference book<br  /><div class="outline-text-6" id="text-1-4-1-4-5">
+<p>
+This might be a unit test?
+</p>
+</div>
+</li>
+<li><a id="sec-1-4-1-4-6" name="sec-1-4-1-4-6"></a>User tries to check out many books, including a reference book<br  /><div class="outline-text-6" id="text-1-4-1-4-6">
+<p>
+This might be a unit test?
+</p>
+</div>
+</li></ol>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Manage Membership</h4>
+<div class="outline-text-4" id="text-1-4-2">
+</div><ol class="org-ol"><li><a id="sec-1-4-2-1" name="sec-1-4-2-1"></a>Anonymous user cannot manage membership (?)<br  /><div class="outline-text-5" id="text-1-4-2-1">
+<p>
+Can a non member even access this, or would it be hidden via UI
+</p>
+</div>
+</li>
+<li><a id="sec-1-4-2-2" name="sec-1-4-2-2"></a>Users new email address is valid<br  /><div class="outline-text-5" id="text-1-4-2-2">
+<p>
+This might be a unit test?
+</p>
+</div>
+</li>
+
+<li><a id="sec-1-4-2-3" name="sec-1-4-2-3"></a>Fine payment<br  /><div class="outline-text-5" id="text-1-4-2-3">
+<p>
+Test(s) for integration of payment w/ manager, might be more UI related / manual testing ?
+</p>
+</div>
+</li>
+<li><a id="sec-1-4-2-4" name="sec-1-4-2-4"></a>Cancel hold notification on multiple holds<br  /><div class="outline-text-5" id="text-1-4-2-4">
+<ul class="org-ul">
+<li>Tom has Book A checked out, Dick and Harry both have Book A on hold.
+</li>
+<li>Dick put it on hold first, Harry second.
+</li>
+<li>Tom returns Book A
+</li>
+<li>Dick is notified (Harry is not?).
+</li>
+</ul>
+<p>
+Additionally&#x2026;
+</p>
+<ul class="org-ul">
+<li>afterwards:
+<ul class="org-ul">
+<li>Dick cancels the hold
+</li>
+<li>Harry is notified
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> Pay Fine</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<ul class="org-ul">
+<li>What if user tries to pay with non-US currency?
+</li>
+<li>different paths: no payment, partial payment, exact payment, over-pay &amp; change, over-pay &amp; donate
+<ul class="org-ul">
+<li>how do these affect the process -&gt; fine -&gt; process ?
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4-4" class="outline-4">
+<h4 id="sec-1-4-4"><span class="section-number-4">1.4.4</span> Return Book</h4>
+<div class="outline-text-4" id="text-1-4-4">
+</div><ol class="org-ol"><li><a id="sec-1-4-4-1" name="sec-1-4-4-1"></a>FINES<br  /><ol class="org-ol"><li><a id="sec-1-4-4-1-1" name="sec-1-4-4-1-1"></a>Only overdue items incur fine<br  /><div class="outline-text-6" id="text-1-4-4-1-1">
+<p>
+Different combinations of returns, make sure only fine is incurred for overdue items
+</p>
+</div>
+</li>
+<li><a id="sec-1-4-4-1-2" name="sec-1-4-4-1-2"></a>Fine accumulation (has fine, returns book with fine)<br  /></li>
+<li><a id="sec-1-4-4-1-3" name="sec-1-4-4-1-3"></a>Fine payment?<br  /><div class="outline-text-6" id="text-1-4-4-1-3">
+<ul class="org-ul">
+<li>return a book that isn't checked out?
+</li>
+<li>return a reference book?
+</li>
+</ul>
+</div>
+</li></ol>
+</li>
+<li><a id="sec-1-4-4-2" name="sec-1-4-4-2"></a>NOTIFICATION<br  /><ol class="org-ol"><li><a id="sec-1-4-4-2-1" name="sec-1-4-4-2-1"></a>Returned, overdue book with hold causes notification<br  /><div class="outline-text-6" id="text-1-4-4-2-1">
+<p>
+Making sure expected continuation of workflow happens
+</p>
+</div>
+</li>
+<li><a id="sec-1-4-4-2-2" name="sec-1-4-4-2-2"></a>Notifify if book on hold<br  /></li>
+<li><a id="sec-1-4-4-2-3" name="sec-1-4-4-2-3"></a>Multiple Users have hold, who is notified?<br  /><div class="outline-text-6" id="text-1-4-4-2-3">
+<p>
+See "Manage Membership / Cancel hold notification on multiple holds"
+</p>
+</div>
+</li></ol>
+</li>
+<li><a id="sec-1-4-4-3" name="sec-1-4-4-3"></a>Books returned are available<br  /><div class="outline-text-5" id="text-1-4-4-3">
+<p>
+This might be a unit test?
+</p>
+</div>
+</li></ol>
+</div>
+<div id="outline-container-sec-1-4-5" class="outline-4">
+<h4 id="sec-1-4-5"><span class="section-number-4">1.4.5</span> Search Catalog</h4>
+<div class="outline-text-4" id="text-1-4-5">
+</div><ol class="org-ol"><li><a id="sec-1-4-5-1" name="sec-1-4-5-1"></a>Search available to any user<br  /></li>
+
+<li><a id="sec-1-4-5-2" name="sec-1-4-5-2"></a>Search results (mixed search types)<br  /><div class="outline-text-5" id="text-1-4-5-2">
+<p>
+This might be a unit test?
+This might be a good use of NUnit's [TestCase(params)]
+Different combinations of search for same book return book
+</p>
+</div>
+</li>
+<li><a id="sec-1-4-5-3" name="sec-1-4-5-3"></a>Garbage in - Garbage out searches<br  /><div class="outline-text-5" id="text-1-4-5-3">
+<p>
+Different searches with bad data, what happens?
+Do we include "Did you mean&#x2026;?"
+</p>
+</div>
+</li>
+<li><a id="sec-1-4-5-4" name="sec-1-4-5-4"></a>Search count / sorting ?<br  /><div class="outline-text-5" id="text-1-4-5-4">
+<p>
+This might be a unit test?
+</p>
+</div>
+</li></ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-04-02 Thu 09:45</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

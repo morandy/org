@@ -96,8 +96,12 @@ laid out in a google doc.
 This can also be used in order to set up an automatic key rotation.
 * Weekly
 ** Mondays
-- Print Time Sheet ([[https://drive.google.com/a/optirtc.com/file/d/0B8Hyy5IIgaGWcW56NGstUFRjeWdPUUt0WXFSakM5YjljV19B/view?usp=sharing][PDF]])
 - Update ~/Documents/org/ in github
+** Fridays
+- Print Time Sheet ([[https://drive.google.com/a/optirtc.com/file/d/0B8Hyy5IIgaGWcW56NGstUFRjeWdPUUt0WXFSakM5YjljV19B/view?usp=sharing][PDF]])
+  - No longer need to write SSN
+
+
 * IMPORTANT
 ** Update ~/Documents/org in git hub (weekly?)
 Monday morning

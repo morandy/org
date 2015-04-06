@@ -1,0 +1,20 @@
+| Grand Mutsu Jingasa  | OO  |     |
+| Kaiser Vest X        | OO  | XX  |
+| Kaiser Guards X      | OOO | XXX |
+| Grand Mutsu Koshiate | OO  | XX  |
+| Grand Mutsu Gosuko   | --  |     |
+| Charm                | OOO | XXX |
+
+| skill      | active |     |    |   |   |   |   |   |   |
+| pierce up  | +10    |  +6 | +4 |   |   |   |   |   |   |
+| loading    | +10    |  +6 | +4 |   |   |   |   |   |   |
+| recoild    | +10    | +10 |    |   |   |   |   |   |   |
+| brutality  | +10    | +11 |    |   |   |   |   |   |   |
+| attack     |        |  +1 |    |   |   |   |   |   |   |
+| biology    |        |  +2 |    |   |   |   |   |   |   |
+| evade dist | +10    |  +4 | +6 |   |   |   |   |   |   |
+
+pierce jewel 3 (+4, 3 slots)
+2x jumping jewel 2 (+3, 2 slots each)
+
+use other 3 slots for load +4 jewel??
